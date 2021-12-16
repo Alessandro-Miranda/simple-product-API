@@ -1,4 +1,4 @@
-# Página de produtos e Base de produtos
+# Página de produtos + API de consumo de produtos
 
 ### Status do projeto
 Em fase de estruturação e criação :construction:
@@ -21,12 +21,12 @@ Layout sugerido da página de produtos; :construction:
 
 ## Features
 
-- Back
+- **Back**
     - [ ] Download de informações de pedidos
     - [ ] Atualização das informações
     - [ ] Cronjob para atualizações
     - [ ] API Rest com paginação e seleção múltipla de filtro através de query string
-- Front sugerido
+- **Front sugerido**
     - [ ] Compartilhamento de estado entre componentes utilizando Context API
     - [ ] Seleção de filtros
 
