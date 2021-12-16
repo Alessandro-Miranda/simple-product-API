@@ -25,7 +25,7 @@ Layout sugerido da página de produtos; :construction:
     - [ ] Download de informações de pedidos
     - [ ] Atualização das informações
     - [ ] Cronjob para atualizações
-    - [ ] API Rest com paginação, seleção por query string
+    - [ ] API Rest com paginação e seleção múltipla de filtro através de query string
 - Front sugerido
     - [ ] Compartilhamento de estado entre componentes utilizando Context API
     - [ ] Seleção de filtros
