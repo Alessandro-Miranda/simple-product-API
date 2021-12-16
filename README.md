@@ -1,7 +1,7 @@
-# Página de produtos
+# Página de produtos e Base de produtos
 
 ### Status do projeto
-Em fase de criação :construction:
+Em fase de estruturação e criação :construction:
 
 ## Descrição
 
