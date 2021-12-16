@@ -1,7 +1,7 @@
 # Página de produtos + API de consumo de produtos
 
 ### Status do projeto
-Em fase de estruturação e criação :construction:
+*Em fase de estruturação e criação* :construction:
 
 ## Descrição
 
