@@ -17,7 +17,7 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 - Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :construction:
 - CronJob para rodar as atualizações conforme a necessidade do projeto; :construction:
 - API REST responsável por servir as informações para o front
-Layout sugerido da página de produtos;
+Layout sugerido da página de produtos; :construction:
 
 ## Features
 
