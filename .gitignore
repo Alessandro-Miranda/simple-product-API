@@ -4,3 +4,8 @@
 
 # Composer
 vendor/
+
+# PHP testing
+phpunit.xml
+coverage/
+.phpunit.result.cache
