@@ -1,0 +1,6 @@
+#environment
+.env
+.env.local
+
+# Composer
+vendor/
