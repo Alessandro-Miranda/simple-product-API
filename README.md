@@ -22,13 +22,45 @@ Layout sugerido da página de produtos; :construction:
 ## Features
 
 - **Back**
-    - [ ] Download de informações de pedidos
-    - [ ] Atualização das informações
-    - [ ] Cronjob para atualizações
+    - [ ] Download de informações de produtos
+    - [ ] Atualização das informações dos produtos
+    - [ ] Cronjob para executar atualizações automaticamente
     - [ ] API Rest com paginação e seleção múltipla de filtro através de query string
 - **Front sugerido**
     - [ ] Compartilhamento de estado entre componentes utilizando Context API
     - [ ] Seleção de filtros
+
+## Pré-requisitos
+
+Para o desenvolvimento do projeto, primeiramente é necessário ter em sua máquina o [Composer](https://getcomposer.org/), alguma servidor apache como, por exemplo, [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou o [PHP](https://www.php.net/downloads.php) instalado.
+
+## Inicialização
+
+### API - Server
+
+Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, então, instale as dependências utilizando o composer
+
+>cd server && php composer.phar install
+
+Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias.
+
+Para utilizar o formato da tabela como a criada no projeto, basta importar o Schema presenta na pasta **database** dentro do MySQL para que seja criado a base de dados com a mesma estrutura.
+
+### Servidor de desenvolvimento
+
+Para dar início ao servidor de desenvolvimento basta seguir os passos do servidor utilizado ou, caso utilize o servidor embutido do PHP, basta rodar, no terminal, o comando para que seja iniciado o servidor em modo de desenvolvimento.
+
+>composer server
+
+Com o servidor iniciado já será possível acessar o conteúdo através das seguintes rotas:
+
+- (Rotas ainda serão definidas)
+
+## Testes
+
+Para executar os testes (execução e cobertura), basta executar, no terminal, o comando:
+
+> composer test
 
 ## Tecnologias e Ferramentas
 
@@ -41,4 +73,4 @@ Layout sugerido da página de produtos; :construction:
 - [Alessandro Miranda](https://github.com/Alessandro-Miranda) - _Ideia inicial e desenvolvimento_
 
 ## Licença
-Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE.md)para detalhes
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE.md) para detalhes
