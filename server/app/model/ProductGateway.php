@@ -6,20 +6,25 @@
     class ProductGateway
     {
         private $db;
+        private $rows;
 
-        public function __construct($db = null)
+        public function __construct()
         {
-            if(is_null($db))
-            {
-                $db = new Database();
-            }
-
-            $this->db = $db;
+            $this->db = new Database();
         }
 
         public function findAll()
         {
+            $result = $this->db->findAllProducts();
 
+            return $result;
+        }
+
+        public function findByName($productName)
+        {
+            $result = $this->db->findProductByName();
+            
+            return $result;
         }
     }
 ?>
