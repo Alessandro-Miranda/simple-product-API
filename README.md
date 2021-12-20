@@ -56,12 +56,6 @@ Com o servidor iniciado já será possível acessar o conteúdo através das seg
 
 - (Rotas ainda serão definidas)
 
-## Testes
-
-Para executar os testes (execução e cobertura), basta executar, no terminal, o comando:
-
-> composer test
-
 ## Tecnologias e Ferramentas
 
 - [PHP](https://www.php.net/)
