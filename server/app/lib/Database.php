@@ -4,6 +4,7 @@
     use PDO;
     use PDOException;
 
+    // @codeCoverageIgnoreStart
     class Database
     {
         public $PDO;
@@ -14,10 +15,10 @@
             $database = $_ENV['DATABASE'];
             $username = $_ENV['USERNAME'];
             $password = $_ENV['PASSWORD'];
-            echo $host;
+            
             try
             {
-                $this->PDO = new PDO("mysql:host=$host;dbname´=$database", $username, $password);
+                $this->PDO = new pdo("mysql:host=$host;dbname=$database", $username, $password);
             }
             catch(PDOException $err)
             {
@@ -29,5 +30,21 @@
         {
             return $this->PDO;
         }
+
+        public function findAllProducts()
+        {
+            $stmt = $this->PDO->prepare("SELECT * FROM produtos");
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+        public function findProductByName()
+        {
+
+        }
     }
+    // @codeCoverageIgnoreEnd
 ?>
