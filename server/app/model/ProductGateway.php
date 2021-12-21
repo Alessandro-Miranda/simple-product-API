@@ -13,18 +13,42 @@
             $this->db = new Database();
         }
 
-        public function findAll()
+        public function findAll($limit, $page)
         {
-            $result = $this->db->findAllProducts();
+            $actualPageLimit = $this->getActualPageRange($limit, $page);
 
-            return $result;
+            try
+            {
+                $result = $this->db->findAllProducts($actualPageLimit, $limit);
+
+                return $result;
+            }
+            catch(\PDOException $err)
+            {
+                header("HTTP/1.1 500 Internal Server Error");
+                echo $err;
+            }
         }
 
-        public function findByName($productName)
+        public function filterProductsByQueryString($filters, $limit, $page)
         {
-            $result = $this->db->findProductByName();
-            
-            return $result;
+            $actualPageLimit = $this->getActualPageRange($limit, $page);
+
+            try
+            {
+                $result = $this->db->filterProducts($filters, $actualPageLimit, $limit);
+                return $result;
+            }
+            catch(\PDOException $err)
+            {
+                header("HTTP/1.1 500 Internal Server Error");
+                echo $err;
+            }
+        }
+
+        private function getActualPageRange($limit, $page)
+        {
+            return ($limit * $page) - $limit;
         }
     }
 ?>
