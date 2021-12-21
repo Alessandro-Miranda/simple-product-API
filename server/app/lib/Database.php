@@ -30,9 +30,9 @@
             return $this->PDO;
         }
 
-        public function findAllProducts($actualPageLimit, $limit)
+        public function findAllProducts($actualPageLimitInit, $limit)
         {
-            $stmt = $this->PDO->prepare("SELECT * FROM produtos LIMIT $actualPageLimit,$limit");
+            $stmt = $this->PDO->prepare("SELECT * FROM produtos LIMIT $actualPageLimitInit,$limit");
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,11 +40,16 @@
             return $result;
         }
 
-        public function filterProducts($filter, $actualPageLimit, $limit)
+        public function filterProducts($filter, $actualPageLimitInit, $limit)
         {
+            if(empty($filter))
+            {
+                return $this->findAllProducts($actualPageLimitInit, $limit);
+            }
+            
             $whereFilters = $this->performWhereFilters($filter);
 
-            $stmt = $this->PDO->prepare("SELECT * FROM produtos WHERE $whereFilters LIMIT $actualPageLimit,$limit");
+            $stmt = $this->PDO->prepare("SELECT * FROM produtos WHERE $whereFilters LIMIT $actualPageLimitInit,$limit");
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,7 +63,13 @@
 
             foreach($filters as $key => $value)
             {
-                if($whereFilter === '')
+                if($key === 'discountTag')
+                {
+                    $whereFilter = "$key <= " . intval($value);
+                    continue;
+                }
+
+                if($whereFilter === ''  )
                 {
                     $whereFilter .= $key . " REGEXP '" . implode("|", explode(" ", $value)) . "'";
                 }
