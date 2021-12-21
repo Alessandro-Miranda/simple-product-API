@@ -19,5 +19,17 @@
 
     $queryString = $_SERVER['QUERY_STRING'];
 
-    new ProductController($queryString);
+    $productController = new ProductController();
+    $result;
+
+    if(empty($queryString))
+    {
+        $result = $productController->getAllProducts();
+    }
+    else
+    {
+        $result = $productController->filterProducts($queryString);
+    }
+
+    echo json_encode($result);
 ?>
