@@ -6,51 +6,51 @@
     class ProductController
     {
         private $model;
-        private $filter;
+        private $filters = array();
         private $limit = 10;
         private $page = 1;
 
-        public function __construct($queryString)
+        public function __construct()
         {
             $this->model = new ProductGateway();
-
-            if(empty($queryString))
-            {
-                $this->getAllProducts();
-            }
-
-            $this->explodeQuery($queryString);
         }
 
         public function getAllProducts()
         {
-            $result = $this->model->findAll();
+            $result = $this->model->findAll($this->limit, $this->page);
 
             header("HTTP/1.1 200 OK");
             echo json_encode($result);
         }
 
-        public function categoryFilter()
+        public function filterProducts($queryString)
         {
+            $this->explodeQuery($queryString);
+            
+            $result = $this->model->filterProductsByQueryString($this->filters, $this->limit, $this->page);
 
-        }
-
-        public function discountFilter()
-        {
-
-        }
-
-        public function productNameFilter()
-        {
-
+            return $result;
         }
 
         public function explodeQuery($query)
         {
-            // $exploadedQuery = explode('&', $query);
             parse_str($query, $exploadedQuery);
-
-            echo var_dump($exploadedQuery);
+            
+            foreach($exploadedQuery as $key => $value)
+            {
+                if($key === 'limit')
+                {
+                    $this->limit = $value;
+                    continue;
+                }
+                if($key === 'page')
+                {
+                    $this->page = $value;
+                    continue;
+                }
+                
+                $this->filters[$key] = $value;
+            }
         }
     }
 ?>
