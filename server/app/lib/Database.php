@@ -4,7 +4,6 @@
     use PDO;
     use PDOException;
 
-    // @codeCoverageIgnoreStart
     class Database
     {
         public $PDO;
@@ -31,20 +30,45 @@
             return $this->PDO;
         }
 
-        public function findAllProducts()
+        public function findAllProducts($actualPageLimit, $limit)
         {
-            $stmt = $this->PDO->prepare("SELECT * FROM produtos");
+            $stmt = $this->PDO->prepare("SELECT * FROM produtos LIMIT $actualPageLimit,$limit");
             $stmt->execute();
 
-            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         }
 
-        public function findProductByName()
+        public function filterProducts($filter, $actualPageLimit, $limit)
         {
+            $whereFilters = $this->performWhereFilters($filter);
 
+            $stmt = $this->PDO->prepare("SELECT * FROM produtos WHERE $whereFilters LIMIT $actualPageLimit,$limit");
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+        private function performWhereFilters($filters)
+        {
+            $whereFilter = '';
+
+            foreach($filters as $key => $value)
+            {
+                if($whereFilter === '')
+                {
+                    $whereFilter .= $key . " REGEXP '" . implode("|", explode(" ", $value)) . "'";
+                }
+                else
+                {
+                    $whereFilter .= "AND " . $key . " REGEXP '" . implode("|", explode(" ", $value)) . "'";
+                }
+            }
+            
+            return $whereFilter;
         }
     }
-    // @codeCoverageIgnoreEnd
 ?>
