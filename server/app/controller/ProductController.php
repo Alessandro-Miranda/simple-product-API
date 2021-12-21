@@ -19,8 +19,7 @@
         {
             $result = $this->model->findAll($this->limit, $this->page);
 
-            header("HTTP/1.1 200 OK");
-            echo json_encode($result);
+            return $result;
         }
 
         public function filterProducts($queryString)
