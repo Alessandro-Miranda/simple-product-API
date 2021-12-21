@@ -6,7 +6,6 @@
     class ProductGateway
     {
         private $db;
-        private $rows;
 
         public function __construct()
         {
