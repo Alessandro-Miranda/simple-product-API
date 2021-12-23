@@ -49,6 +49,17 @@
                     continue;
                 }
                 
+                if(
+                    $key !== 'productName' ||
+                    $key !== 'discountTag' ||
+                    $key !== 'productCategories' ||
+                    $key !== 'productID' ||
+                    $key !== 'sku'
+                )
+                {
+                    continue;
+                }
+
                 $this->filters[$key] = $value;
             }
         }
