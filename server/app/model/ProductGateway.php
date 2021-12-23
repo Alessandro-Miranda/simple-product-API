@@ -43,6 +43,20 @@
             }
         }
 
+        public function getNumberOfRows()
+        {
+            $tableRows = $this->db->numberOfRows();
+
+            return $tableRows;
+        }
+
+        public function totalPages($limit)
+        {
+            $rows = $this->getNumberOfRows();
+
+            return ceil($rows / $limit);
+        }
+
         private function getActualPageRange($limit, $page)
         {
             return ($limit * $page) - $limit;
