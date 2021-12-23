@@ -69,17 +69,28 @@
                     continue;
                 }
 
+                if($key === 'productName')
+                {
+                    $whereFilter .= "$key LIKE '%$value%'";
+                    continue;
+                }
+
                 if($whereFilter === ''  )
                 {
-                    $whereFilter .= $key . " REGEXP '" . implode("|", explode(" ", $value)) . "'";
+                    $whereFilter .= $this->createWhereRegex($key, $value);
                 }
                 else
                 {
-                    $whereFilter .= "AND " . $key . " REGEXP '" . implode("|", explode(" ", $value)) . "'";
+                    $whereFilter .= " AND " . $this->createWhereRegex($key, $value);
                 }
             }
             
             return $whereFilter;
+        }
+
+        private function createWhereRegex($columnName, $valuesToRegexCreate)
+        {
+            return $columnName . " REGEXP '" . implode("|", explode(" ", $valuesToRegexCreate)) . "'";
         }
     }
 ?>
