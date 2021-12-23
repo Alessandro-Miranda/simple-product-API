@@ -57,6 +57,8 @@ Com o servidor iniciado já será possível acessar os produtos disponíveis na 
 - *productName* - nome do produto que está sendo buscado pelo usuário
 - *discountTag* - Faixa de desconto solicitada (Aceita apenas um valor de desconto)
 - *productCategories* - As categorias de produtos (Aceita mais de uma categoria separada pelo sinal de adição(+))
+- *productID* - Id do produto a ser buscado
+- *sku* - Sku dos produto
 
 ### Produtos
 
