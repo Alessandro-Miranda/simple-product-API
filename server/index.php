@@ -9,9 +9,9 @@
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    $uri = explode('/', $uri);
-
-    if($uri[1] != 'products')
+    $hasProductPath = array_search('products', explode('/', $uri));
+    
+    if($hasProductPath === false)
     {
         header("HTTP/1.1 404 Not Found");
         exit();
@@ -20,7 +20,8 @@
     $queryString = $_SERVER['QUERY_STRING'];
 
     $productController = new ProductController();
-    $result;
+
+    $result; // Armazena o resultado da consulta dos produtos
 
     if(empty($queryString))
     {
