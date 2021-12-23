@@ -1,4 +1,4 @@
-# Página de produtos + API de consumo de produtos
+# Página de produtos + Servidor de lista de produtos
 
 ### Status do projeto
 *Em fase de estruturação e criação* :construction:
@@ -32,19 +32,17 @@ Layout sugerido da página de produtos; :construction:
 
 ## Pré-requisitos
 
-Para o desenvolvimento do projeto, primeiramente é necessário ter em sua máquina o [Composer](https://getcomposer.org/), alguma servidor apache como, por exemplo, [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou o [PHP](https://www.php.net/downloads.php) instalado.
+Para o desenvolvimento do projeto, primeiramente é necessário ter em sua máquina o [Composer](https://getcomposer.org/), algum servidor como [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou o [PHP](https://www.php.net/downloads.php) instalado e, também, algum banco de dados.
 
 ## Inicialização
 
-### API - Server
+### Server
 
 Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, então, instale as dependências utilizando o composer
 
 >cd server && php composer.phar install
 
-Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias.
-
-Para utilizar o formato da tabela como a criada no projeto, basta importar o Schema presenta na pasta **database** dentro do MySQL para que seja criado a base de dados com a mesma estrutura.
+Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código.
 
 ### Servidor de desenvolvimento
 
@@ -52,15 +50,86 @@ Para dar início ao servidor de desenvolvimento basta seguir os passos do servid
 
 >composer server
 
-Com o servidor iniciado já será possível acessar o conteúdo através das seguintes rotas:
+Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da chamada do /products, através da aplicação front que esteja sendo construída ou utilizando alguma ferramenta como, por exemplo, o Insomnia ou Postman. As informações possíveis de serem passadas via Query String são:
 
-- (Rotas ainda serão definidas)
+- *limit* - Limite de itens retornados em cada página
+- *page* - página de pedidos atual solicitada
+- *productName* - nome do produto que está sendo buscado pelo usuário
+- *discountTag* - Faixa de desconto solicitada (Aceita apenas um valor de desconto)
+- *productCategories* - As categorias de produtos (Aceita mais de uma categoria separada pelo sinal de adição(+))
+
+### Produtos
+
+Todos os produtos são identificados pelo productId e, também, pelo seu SKU. Todos os produtos têm as seguintes propriedades
+
+Campo                |  Descrição
+-------------------- | --------------------
+productID            |   Id único do produto
+sku                  |   Sku do produto - identificado único junto com o SKU
+sellerID             |   String contendo o identificador do seller do produto (o valor padrão do seller é 1)
+imageUrl             |   Url da imagem do produto
+detailUrl            |   Url da página do produto
+productName:         |   Nome do produto
+discountTag:         |   Tag de desconto com base no valor De/Por
+listPrice:           |   preço original (De)
+bestPrice:           |   Preço com desconto, se houver (Por)
+productCategories:   |   Lista de categorias que a produto pertence
+
+## Uso
+
+Para listar todos os produtos ou filtrar com base na queryStrig passada, pode-se utilizar a URL [https://{Your-url-here}/products](), substituindo os termos entre chaves pela URL onde a aplicação está rodando, seja no servidor de desenvolvimento ou no servidor de hospedagem.
+
+_obs: Por padrão o limite de produtos retornados é 10 e a página atual sempre a primeira_
+
+Para Realizar os filtros basta utilizar as querys no seguinte formato:
+
+- [https://{Your-url-here}/products?productName=some%20%product]() = Retorna os produtos que contenham o nome passado
+- [https://{Your-url-here}/products?discountTag=40]() = Retorna os produtos que estejam até a faixa de desconto selecionada
+- [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude]() = Retorna os produtos que pertençam a categoria passada
+- [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=20]() = Limita o resultado da busca em 20 itens por página
+- [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&page=2]() = Solicita a página 2 a listagem de produtos
+
+_O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos._
+
+### Exemplo de retorno
+
+Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=2](), será retornado os dados como exemplo abaixo
+
+```json
+[
+	{
+		"productID": 1,
+		"sku": 1,
+		"sellerID": "1",
+		"imageUrl": "https://image.com.br",
+		"detailUrl": "https://detailUrl.com.br",
+		"productName": "produto de exemplo 1",
+		"discountTag": 20,
+		"listPrice": 3561,
+		"bestPrice": 3099,
+		"productCategories": "Emagrecimento"
+	},
+	{
+		"productID": 2,
+		"sku": 2,
+		"sellerID": "1",
+		"imageUrl": "https://image.com.br",
+		"detailUrl": "https://detailUrl.com.br",
+		"productName": "produto teste2",
+		"discountTag": 20,
+		"listPrice": 3561,
+		"bestPrice": 3099,
+		"productCategories": "Beleza"
+	}
+]
+```
 
 ## Tecnologias e Ferramentas
 
 - [PHP](https://www.php.net/)
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
+- [Insomnia](https://insomnia.rest/download)
 
 ## Autores
 
