@@ -57,8 +57,8 @@ Com o servidor iniciado já será possível acessar os produtos disponíveis na 
 - *productName* - nome do produto que está sendo buscado pelo usuário
 - *discountTag* - Faixa de desconto solicitada (Aceita apenas um valor de desconto)
 - *productCategories* - As categorias de produtos (Aceita mais de uma categoria separada pelo sinal de adição(+))
-- *productID* - Id do produto a ser buscado
-- *sku* - Sku dos produto
+- *productID* - Id do produto buscado
+- *sku* - Sku do produto buscado
 
 ### Produtos
 
@@ -95,7 +95,7 @@ _O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outr
 
 ### Exemplo de retorno
 
-Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=2](), será retornado os dados como exemplo abaixo
+Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=2](), o retorno será como o exemplo abaixo
 
 ```json
 [
