@@ -39,12 +39,13 @@
             {
                 if($key === 'limit')
                 {
-                    $this->limit = $value;
+                    
+                    $this->limit = intval($value) > 100 ? 100 : intval($value);
                     continue;
                 }
                 if($key === 'page')
                 {
-                    $this->page = $value;
+                    $this->page = intval($value);
                     continue;
                 }
                 
