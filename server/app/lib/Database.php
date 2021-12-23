@@ -57,6 +57,14 @@
             return $result;
         }
 
+        public function numberOfRows()
+        {
+            $stmt = $this->PDO->query("SELECT COUNT(*) FROM produtos");
+            $stmt->execute();
+
+            return $stmt->fetchColumn();
+        }
+
         private function performWhereFilters($filters)
         {
             $whereFilter = '';
