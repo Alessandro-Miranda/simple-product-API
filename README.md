@@ -91,7 +91,7 @@ Para Realizar os filtros basta utilizar as querys no seguinte formato:
 - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=20]() = Limita o resultado da busca em 20 itens por página
 - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&page=2]() = Solicita a página 2 a listagem de produtos
 
-_O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre retornado o limite de 10 produtos e referente a página 1._
+_O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre associado a eles o valor 10 e 1, respectivamente._
 
 ### Exemplo de retorno
 
