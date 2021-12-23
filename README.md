@@ -50,7 +50,7 @@ Para dar início ao servidor de desenvolvimento basta seguir os passos do servid
 
 >composer server
 
-Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da chamada do /products, através da aplicação front que esteja sendo construída ou utilizando alguma ferramenta como, por exemplo, o Insomnia ou Postman. As informações possíveis de serem passadas via Query String são:
+Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da chamada do */products*, através da aplicação front que esteja sendo construída ou utilizando alguma ferramenta como, por exemplo, o Insomnia ou Postman. As informações possíveis de serem passadas via Query String são:
 
 - *limit* - Limite de itens retornados em cada página
 - *page* - página de exibição de produtos
@@ -81,7 +81,7 @@ productCategories:   |   Lista de categorias a que o produto pertence
 
 Para listar todos os produtos ou filtrar com base na queryStrig passada, pode-se utilizar a URL [https://{Your-url-here}/products](), substituindo os termos entre chaves pela URL onde a aplicação está rodando, seja no servidor de desenvolvimento ou no servidor de hospedagem.
 
-_obs: Por padrão o limite de produtos retornados é 10 e a página atual sempre a primeira_
+_obs: Por padrão o limite de produtos retornados é 10 e o máximo é 100 e a página atual sempre a primeira_
 
 Para Realizar os filtros basta utilizar as querys no seguinte formato:
 
@@ -91,7 +91,7 @@ Para Realizar os filtros basta utilizar as querys no seguinte formato:
 - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=20]() = Limita o resultado da busca em 20 itens por página
 - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&page=2]() = Solicita a página 2 a listagem de produtos
 
-_O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos._
+_O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre retornado o limite de 10 produtos e referente a página 1._
 
 ### Exemplo de retorno
 
