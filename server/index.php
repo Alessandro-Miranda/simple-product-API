@@ -7,6 +7,12 @@
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->safeLoad();
 
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+        header("HTTP/1.1 405 Method Not Allowed");
+        exit();
+    }
+
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
     $hasProductPath = array_search('products', explode('/', $uri));
