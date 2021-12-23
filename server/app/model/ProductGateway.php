@@ -24,8 +24,7 @@
             }
             catch(\PDOException $err)
             {
-                header("HTTP/1.1 500 Internal Server Error");
-                echo $err;
+                $this->getError($err);
             }
         }
 
@@ -40,14 +39,19 @@
             }
             catch(\PDOException $err)
             {
-                header("HTTP/1.1 500 Internal Server Error");
-                echo $err;
+                $this->getError($err);
             }
         }
 
         private function getActualPageRange($limit, $page)
         {
             return ($limit * $page) - $limit;
+        }
+
+        private function getError($error)
+        {
+            header("HTTP/1.1 500 Internal Server Error");
+            echo $error;
         }
     }
 ?>
