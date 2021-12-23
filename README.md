@@ -17,7 +17,7 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 - Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :construction:
 - CronJob para rodar as atualizações conforme a necessidade do projeto; :construction:
 - API REST responsável por servir as informações para o front
-Layout sugerido da página de produtos; :construction:
+- Layout sugerido da página de produtos; :construction:
 
 ## Features
 
@@ -53,8 +53,8 @@ Para dar início ao servidor de desenvolvimento basta seguir os passos do servid
 Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da chamada do /products, através da aplicação front que esteja sendo construída ou utilizando alguma ferramenta como, por exemplo, o Insomnia ou Postman. As informações possíveis de serem passadas via Query String são:
 
 - *limit* - Limite de itens retornados em cada página
-- *page* - página de pedidos atual solicitada
-- *productName* - nome do produto que está sendo buscado pelo usuário
+- *page* - página de exibição de produtos
+- *productName* - nome do produto que está sendo buscado
 - *discountTag* - Faixa de desconto solicitada (Aceita apenas um valor de desconto)
 - *productCategories* - As categorias de produtos (Aceita mais de uma categoria separada pelo sinal de adição(+))
 - *productID* - Id do produto buscado
@@ -62,7 +62,7 @@ Com o servidor iniciado já será possível acessar os produtos disponíveis na 
 
 ### Produtos
 
-Todos os produtos são identificados pelo productId e, também, pelo seu SKU. Todos os produtos têm as seguintes propriedades
+Todos os produtos são identificados pelo productId e, também, pelo seu SKU. Todos os produtos tem as seguintes propriedades
 
 Campo                |  Descrição
 -------------------- | --------------------
@@ -75,7 +75,7 @@ productName:         |   Nome do produto
 discountTag:         |   Tag de desconto com base no valor De/Por
 listPrice:           |   preço original (De)
 bestPrice:           |   Preço com desconto, se houver (Por)
-productCategories:   |   Lista de categorias que a produto pertence
+productCategories:   |   Lista de categorias a que o produto pertence
 
 ## Uso
 
