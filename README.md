@@ -1,7 +1,8 @@
 # Página de produtos + Servidor de lista de produtos
 
 ### Status do projeto
-*Em fase de estruturação e criação* :construction:
+
+*Em desenvolvimento* :construction:
 
 ## Descrição
 
@@ -148,4 +149,5 @@ Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrec
 - [Alessandro Miranda](https://github.com/Alessandro-Miranda) - _Ideia inicial e desenvolvimento_
 
 ## Licença
+
 Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE.md) para detalhes
