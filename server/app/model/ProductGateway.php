@@ -2,6 +2,7 @@
     namespace App\Model;
 
     use App\Lib\Database;
+    use App\Utils\ErrorMessages;
     use App\Utils\RegisterLog;
 
     class ProductGateway
@@ -26,7 +27,7 @@
             catch(\PDOException $err)
             {
                 RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
-                $this->getError($err);
+                ErrorMessages::returnMessageError(500, "Internal Server Error", $err);
             }
         }
 
@@ -42,7 +43,7 @@
             catch(\PDOException $err)
             {
                 RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
-                $this->getError($err);
+                ErrorMessages::returnMessageError(500, "Internal Server Error", $err);
             }
         }
 
@@ -63,12 +64,6 @@
         private function getActualPageRange($limit, $page)
         {
             return ($limit * $page) - $limit;
-        }
-
-        private function getError($error)
-        {
-            header("HTTP/1.1 500 Internal Server Error");
-            echo $error;
         }
     }
 ?>
