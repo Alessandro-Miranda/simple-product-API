@@ -19,7 +19,7 @@
             
             try
             {
-                $this->PDO = new pdo("mysql:host=$host;dbname=$database", $username, $password);
+                $this->PDO = new PDO("mysql:host=$host;dbname=$database", $username, $password);
             }
             catch(PDOException $err)
             {
