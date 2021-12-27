@@ -1,5 +1,5 @@
 <?php
-    set_time_limit(1800);
+    set_time_limit(3600);
     
     require 'vendor/autoload.php';
 
