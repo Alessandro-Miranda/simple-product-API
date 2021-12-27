@@ -3,7 +3,7 @@
     
     class RegisterLog
     {
-        public static function RegisterExceptionLog($infoLevel, $message, $fileName = 'exceptions.log')
+        public static function RegisterLog($infoLevel, $message, $fileName)
         {
             $date = date('l jS \of F Y h:i:s A');
             $msg = "{$date} - " . strtoupper($infoLevel) . " - Message: {$message} \n";
