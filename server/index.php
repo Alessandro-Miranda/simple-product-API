@@ -27,16 +27,12 @@
 
     $productController = new ProductController();
 
-    $result; // Armazena o resultado da consulta dos produtos
-
     if(empty($queryString))
     {
-        $result = $productController->getAllProducts();
+        $productController->getAllProducts();
     }
     else
     {
-        $result = $productController->filterProducts($queryString);
+        $productController->filterProducts($queryString);
     }
-
-    echo json_encode($result, JSON_UNESCAPED_SLASHES);
 ?>
