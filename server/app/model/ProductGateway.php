@@ -26,7 +26,7 @@
             }
             catch(\PDOException $err)
             {
-                RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
+                RegisterLog::RegisterLog("Database Exception", $err->getMessage(), "exceptions.log");
                 ErrorMessages::returnMessageError(500, "Internal Server Error", $err);
             }
         }
@@ -42,7 +42,7 @@
             }
             catch(\PDOException $err)
             {
-                RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
+                RegisterLog::RegisterLog("Database Exception", $err->getMessage(), "exceptions.log");
                 ErrorMessages::returnMessageError(500, "Internal Server Error", $err);
             }
         }
