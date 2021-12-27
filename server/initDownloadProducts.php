@@ -29,11 +29,7 @@
             $prices = curl_exec($curl);
             $error = curl_error($curl);
 
-            if($error)
-            {
-                RegisterLog::RegisterLog("Error downloading product price", $error, "exceptions.log");
-                exit();
-            }
+            checkError("Error downloading product price", $error);
 
             $pricesDecoded = json_decode($prices, true);
 
@@ -75,15 +71,11 @@
             prepareRequest($curl, "https://{$accountName}.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/{$value}");
     
             $basicInfos = curl_exec($curl);
-            $basicInfosErr = curl_error($curl);
+            $error = curl_error($curl);
 
             $productInformation = array();
             
-            if($basicInfosErr)
-            {
-                RegisterLog::RegisterLog("Error downloading products", $basicInfosErr, "exceptions.log");
-                exit();
-            }
+            checkError("Error downloading products", $error);
 
             $jsonDecoded = json_decode($basicInfos, true);
            
@@ -115,7 +107,7 @@
                 $counter++;
             }
         }
-        
+
         curl_close($curl);
     })();
 
@@ -139,5 +131,14 @@
                 "X-VTEX-API-AppToken: {$appToken}"
             ]
         ]);
+    }
+
+    function checkError($message, $error)
+    {
+        if($error)
+        {
+            RegisterLog::RegisterLog($message, $error, "exceptions.log");
+            exit();
+        }
     }
 ?>
