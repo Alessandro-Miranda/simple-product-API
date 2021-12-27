@@ -49,7 +49,7 @@
             
             $whereFilters = $this->performWhereFilters($filter);
 
-            $stmt = $this->PDO->prepare("SELECT * FROM produtos WHERE $whereFilters LIMIT $actualPageLimitInit,$limit");
+            $stmt = $this->PDO->prepare("SELECT * FROM produtos WHERE {$whereFilters} LIMIT {$actualPageLimitInit},{$limit}");
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,13 +73,13 @@
             {
                 if($key === 'discountTag')
                 {
-                    $whereFilter = "$key <= " . intval($value);
+                    $whereFilter = "{$key} <= " . intval($value);
                     continue;
                 }
 
                 if($key === 'productName')
                 {
-                    $whereFilter .= "$key LIKE '%$value%'";
+                    $whereFilter .= "{$key} LIKE '%{$value}%'";
                     continue;
                 }
 
@@ -98,7 +98,7 @@
 
         private function createWhereRegex($columnName, $valuesToRegexCreate)
         {
-            return $columnName . " REGEXP '" . implode("|", explode(" ", $valuesToRegexCreate)) . "'";
+            return "{$columnName} REGEXP '" . implode("|", explode(" ", $valuesToRegexCreate)) . "'";
         }
     }
 ?>
