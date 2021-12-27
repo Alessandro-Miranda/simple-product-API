@@ -3,6 +3,7 @@
 
     use App\Model\ProductGateway;
     use App\Utils\ErrorMessages;
+    use App\Utils\RegisterLog;
 
     class ProductController
     {
@@ -76,6 +77,7 @@
         {
             if($this->model->totalPages($this->limit) < $this->page)
             {
+                RegisterLog::RegisterLog("Warning", "Página solicitada não encontrada", "warnings.log");
                 ErrorMessages::returnMessageError(404, "Not Found", "Page not found", "Página não existe ou o valor passado é diferente de um número");
             }
         }
