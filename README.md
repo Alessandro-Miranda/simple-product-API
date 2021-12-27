@@ -25,11 +25,9 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 - **Back**
     - [ ] Download de informações de produtos
     - [ ] Atualização das informações dos produtos
-    - [ ] Cronjob para executar atualizações automaticamente
-    - [ ] Aplicação para retornar os produtos com base nos filtros solicitados
+    - [x] Aplicação para retornar os produtos com base nos filtros solicitados
 - **Front sugerido**
-    - [ ] Compartilhamento de estado entre componentes utilizando Context API
-    - [ ] Seleção de filtros
+    - [ ] Criação da interface
 
 ## Pré-requisitos
 
