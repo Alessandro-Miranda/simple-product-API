@@ -2,9 +2,9 @@
     namespace App\Controller;
 
     use App\Model\ProductGateway;
-use App\Utils\ErrorMessages;
+    use App\Utils\ErrorMessages;
 
-class ProductController
+    class ProductController
     {
         private $model;
         private $filters = array();
