@@ -2,6 +2,7 @@
     namespace App\Model;
 
     use App\Lib\Database;
+    use App\Utils\RegisterLog;
 
     class ProductGateway
     {
@@ -24,6 +25,7 @@
             }
             catch(\PDOException $err)
             {
+                RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
                 $this->getError($err);
             }
         }
@@ -39,6 +41,7 @@
             }
             catch(\PDOException $err)
             {
+                RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
                 $this->getError($err);
             }
         }
