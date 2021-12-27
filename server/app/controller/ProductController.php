@@ -2,8 +2,9 @@
     namespace App\Controller;
 
     use App\Model\ProductGateway;
+use App\Utils\ErrorMessages;
 
-    class ProductController
+class ProductController
     {
         private $model;
         private $filters = array();
@@ -17,12 +18,7 @@
 
         public function getAllProducts()
         {
-            $result = $this->model->findAll($this->limit, $this->page);
-            $paginationInfos = $this->paginationInfos();
-
-            array_push($result, $paginationInfos);
-
-            return $result;
+            $this->sendResponse($this->model->findAll($this->limit, $this->page));
         }
 
         public function filterProducts($queryString)
@@ -30,12 +26,7 @@
             $this->explodeQuery($queryString);
             $this->pageExists();
             
-            $result = $this->model->filterProductsByQueryString($this->filters, $this->limit, $this->page);
-            $paginationInfos = $this->paginationInfos();
-
-            array_push($result, $paginationInfos);
-
-            return $result;
+            $this->sendResponse($this->model->filterProductsByQueryString($this->filters, $this->limit, $this->page));
         }
 
         public function explodeQuery($query)
@@ -74,9 +65,10 @@
         public function paginationInfos()
         {
             return array(
-                "rows" => $this->model->getNumberOfRows(),
-                "actual_page" => $this->page,
-                "total_pages" => $this->model->totalPages($this->limit)
+                "totalProducts" => $this->model->getNumberOfRows(),
+                "actualPage" => $this->page,
+                "totalPages" => $this->model->totalPages($this->limit),
+                "perPage" => $this->limit
             );
         }
 
@@ -84,9 +76,20 @@
         {
             if($this->model->totalPages($this->limit) < $this->page)
             {
-                header("HTTP/1.1 404 Not Found");
-                exit();
+                ErrorMessages::returnMessageError(404, "Not Found", "Page not found", "Página não existe ou o valor passado é diferente de um número");
             }
+        }
+
+        public function sendResponse($data)
+        {
+            $data = array(
+                "data" => $data,
+                "pagination" => $this->paginationInfos()
+            );
+            
+            header("Content-Type: application/json");
+            
+            echo json_encode($data, JSON_UNESCAPED_SLASHES);
         }
     }
 ?>
