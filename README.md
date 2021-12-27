@@ -100,32 +100,40 @@ _O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outr
 Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=2](), o retorno será como o exemplo abaixo
 
 ```json
-[
-	{
-		"productID": 1,
-		"sku": 1,
-		"sellerID": "1",
-		"imageUrl": "https://image.com.br",
-		"detailUrl": "https://detailUrl.com.br",
-		"productName": "produto de exemplo 1",
-		"discountTag": 20,
-		"listPrice": 3561,
-		"bestPrice": 3099,
-		"productCategories": "Emagrecimento"
-	},
-	{
-		"productID": 2,
-		"sku": 2,
-		"sellerID": "1",
-		"imageUrl": "https://image.com.br",
-		"detailUrl": "https://detailUrl.com.br",
-		"productName": "produto teste2",
-		"discountTag": 20,
-		"listPrice": 3561,
-		"bestPrice": 3099,
-		"productCategories": "Beleza"
+{
+	"data": [
+		{
+			"productID": 1,
+			"sku": 1,
+			"sellerID": "1",
+			"imageUrl": "https://image.com.br",
+			"detailUrl": "https://detailUrl.com.br",
+			"productName": "produto teste1",
+			"discountTag": 20,
+			"listPrice": 3561,
+			"bestPrice": 3099,
+			"productCategories": "Emagrecimento"
+		},
+		{
+			"productID": 2,
+			"sku": 2,
+			"sellerID": "1",
+			"imageUrl": "https://image.com.br",
+			"detailUrl": "https://detailUrl.com.br",
+			"productName": "produto teste2",
+			"discountTag": 20,
+			"listPrice": 3561,
+			"bestPrice": 3099,
+			"productCategories": "Beleza"
+		}
+	],
+	"pagination": {
+		"totalProducts": 21,
+		"actualPage": 1,
+		"totalPages": 11,
+		"perPage": 2
 	}
-]
+}
 ```
 
 ## Tecnologias e Ferramentas
