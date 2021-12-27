@@ -1,6 +1,7 @@
 <?php
     namespace App\Lib;
 
+    use App\Utils\RegisterLog;
     use PDO;
     use PDOException;
 
@@ -21,6 +22,7 @@
             }
             catch(PDOException $err)
             {
+                RegisterLog::RegisterExceptionLog("Database Exception", $err->getMessage());
                 exit($err->getMessage());
             }
         }
