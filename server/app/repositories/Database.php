@@ -1,8 +1,8 @@
 <?php
     namespace App\Lib;
 
-use App\Utils\ErrorMessages;
-use App\Utils\RegisterLog;
+    use App\Utils\ErrorMessages;
+    use App\Utils\RegisterLog;
     use PDO;
     use PDOException;
 
