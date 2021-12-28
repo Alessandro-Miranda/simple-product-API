@@ -1,5 +1,5 @@
 <?php
-    namespace App\Lib;
+    namespace App\Repositories;
 
     use App\Utils\ErrorMessages;
     use App\Utils\RegisterLog;
