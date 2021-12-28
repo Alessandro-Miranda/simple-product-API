@@ -12,12 +12,10 @@
 
     try
     {
-        $response = $download
+        $download
             ->getPriceInformations()
             ->getProductInformations()
             ->saveProducts();
-
-        echo var_dump($response);
     }
     catch(\PDOException $err)
     {
