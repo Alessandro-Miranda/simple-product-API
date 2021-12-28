@@ -3,7 +3,8 @@
     
     set_time_limit(3600);
 
-    use App\Utils\RegisterLog;
+use App\Repositories\ProductsBase;
+use App\Utils\RegisterLog;
 
     /**
     * Inicia o download dos produtos e salva no banco
@@ -28,6 +29,8 @@
             $this->appToken = $_ENV["XVTEXAPIAppToken"];
             $this->curl = curl_init();
             $this->counter = 0;
+
+            echo "baixando os produtos... <br />";
         }
 
         /**
@@ -37,6 +40,7 @@
          */
         public function getPriceInformations()
         {   
+            echo "Obtendo as informações de preço<br />";
             foreach($this->skus as $value)
             {
                 $this->prepareRequest("https://{$this->accountName}.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/{$value}");
@@ -47,9 +51,7 @@
                 $this->checkError("Error downloading product price", $error);
 
                 $pricesDecoded = json_decode($prices, true);
-                $keys = array(
-                    2 => "salesChannel"
-                );
+                $keys = array(0 => "productId");
 
                 if($pricesDecoded === "ProductId not found")
                 {
@@ -75,6 +77,8 @@
          */
         public function getProductInformations()
         {
+            echo "Buscando as informações adicionais do produto";
+
             foreach($this->eans as $value)
             {
                 $keys = array(
@@ -105,7 +109,9 @@
 
         public function saveProducts()
         {
-            return $this->products;
+            $db = new ProductsBase();
+
+            $db->insert($this->products, "produtos");
         }
 
         /**
@@ -146,9 +152,12 @@
                 // Insere nas informações temporárias do produto os preços e descontos
                 foreach($internalArray as $sku)
                 {
+                    $discountTag = $sku["listPrice"] !== 0 ? round(100 - ($sku["bestPrice"] / $sku["listPrice"]) * 100) : 0;
+
+                    $productInformation["sellerID"] = $sku["sellerId"];
                     $productInformation["listPrice"] = $sku["listPrice"];
                     $productInformation["bestPrice"] = $sku["bestPrice"];
-                    $productInformation["discountTag"] = round(100 - ($sku["bestPrice"] / $sku["listPrice"]) * 100);
+                    $productInformation["discountTag"] = $discountTag;
                 }
             }
             else
@@ -161,6 +170,7 @@
                 {
                     if(in_array($json["ProductId"], $price))
                     {
+                        $productInformation["sellerID"] = $price["sellerID"];
                         $productInformation["listPrice"] = $price["listPrice"];
                         $productInformation["bestPrice"] = $price["bestPrice"];
                         $productInformation["discountTag"] = $price["discountTag"];
@@ -184,8 +194,9 @@
         {
             if($this->counter === 500)
             {
-                sleep(20);
+                echo "Aguardando o script reiniciar";
                 $this->counter=0;
+                sleep(20);
             }
             else
             {
@@ -204,6 +215,7 @@
         {
             if($error)
             {
+                echo "Ocorreu um erro, cheque os logs para maiores informações";
                 RegisterLog::RegisterLog($message, $error, "exceptions.log");
                 exit();
             }
