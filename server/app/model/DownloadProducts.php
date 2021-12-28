@@ -30,6 +30,11 @@
             $this->counter = 0;
         }
 
+        /**
+         * Obtém as informações: 
+         *
+         * @return this
+         */
         public function getPriceInformations()
         {   
             foreach($this->skus as $value)
@@ -43,8 +48,6 @@
 
                 $pricesDecoded = json_decode($prices, true);
                 $keys = array(
-                    0 => "productId",
-                    1 => "name",
                     2 => "salesChannel"
                 );
 
@@ -58,12 +61,18 @@
                     $this->setProductInformations($keys, $pricesDecoded, $pricesDecoded["skus"], "ProductPrice")
                 );
 
+                $this->clearVariables($pricesDecoded);
                 $this->sleep();
             }
 
             return $this;
         }
 
+        /**
+         * Obtém as informações: url da imagem. url da página de destino, categorias, id e nome do produto com base no EAN
+         *
+         * @return this
+         */
         public function getProductInformations()
         {
             foreach($this->eans as $value)
@@ -87,6 +96,7 @@
                 
                 array_push($this->products, $this->setProductInformations($keys, $jsonDecoded, $this->productsPrice));
 
+                $this->clearVariables($jsonDecoded);
                 $this->sleep();
             }
             
@@ -183,6 +193,13 @@
             }
         }
 
+        /**
+         * Verifica se a houve algum erro na requisição e, caso tenha, registra o log e finaliza a execução
+         *
+         * @param [string] $message
+         * @param [Error] $error
+         * @return void
+         */
         private function checkError($message, $error)
         {
             if($error)
@@ -192,6 +209,12 @@
             }
         }
 
+        /**
+         * Prepara a requisição a ser feita
+         *
+         * @param [string] $url
+         * @return void
+         */
         private function prepareRequest($url)
         {
             curl_setopt_array($this->curl, [
@@ -209,6 +232,11 @@
                     "X-VTEX-API-AppToken: {$this->appToken}"
                 ]
             ]);
+        }
+
+        private function clearVariables($var)
+        {
+            unset($var);
         }
 
         function __destruct()
