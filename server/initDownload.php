@@ -10,16 +10,8 @@
 
     $download = new DownloadProducts();
 
-    try
-    {
-        $download
-            ->getPriceInformations()
-            ->getProductInformations()
-            ->saveProducts();
-    }
-    catch(\PDOException $err)
-    {
-        echo "Ocorreu um erro inesperado";
-    }
-    
+    $download
+        ->getPriceInformations()
+        ->getProductInformations()
+        ->saveProducts();
 ?>
