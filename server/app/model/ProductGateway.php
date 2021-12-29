@@ -1,7 +1,7 @@
 <?php
     namespace App\Model;
 
-    use App\Lib\Database;
+    use App\Repositories\Database;
     use App\Utils\ErrorMessages;
     use App\Utils\RegisterLog;
 
@@ -47,16 +47,16 @@
             }
         }
 
-        public function getNumberOfRows()
+        public function getNumberOfRows($filters)
         {
-            $tableRows = $this->db->numberOfRows();
+            $tableRows = $this->db->numberOfRows($filters);
 
             return $tableRows;
         }
 
-        public function totalPages($limit)
+        public function totalPages($limit, $filters)
         {
-            $rows = $this->getNumberOfRows();
+            $rows = $this->getNumberOfRows($filters);
 
             return ceil($rows / $limit);
         }
