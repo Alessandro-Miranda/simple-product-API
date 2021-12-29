@@ -23,10 +23,10 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 ## Features
 
 - **Back**
-    - [ ] Download de informações de produtos
+    - [x] Download de informações de produtos
     - [ ] Atualização das informações dos produtos
     - [x] Aplicação para retornar os produtos com base nos filtros solicitados
-- **Front sugerido**
+- **Front**
     - [ ] Criação da interface
 
 ## Pré-requisitos
