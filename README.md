@@ -10,11 +10,11 @@ Devido à necessidade de criação de páginas com listagem de produtos, para ca
 
 ## Objetivo
 
-O principal objetivo do projeto é criar uma base de dados com as informações de produtos existentes, fazendo atualização contínua das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que, quando necessário, conseguir consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX a cada projeto recriando arquivos com todos os SKUs, EANs e etc.
+O principal objetivo do projeto é criar uma base de dados com as informações de produtos existentes, fazendo atualização contínua das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que, quando necessário, conseguir consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX a cada projeto diferente.
 
 ## Entregáveis
 
-- Base de dados de produtos; :construction:
+- Base de dados de produtos; :white_check_mark:
 - Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :construction:
 - CronJob para rodar as atualizações conforme a necessidade do projeto; :construction:
 - API REST responsável por servir as informações para o front
