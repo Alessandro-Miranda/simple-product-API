@@ -59,7 +59,7 @@
 
             $stmt = $this->PDO->prepare("SELECT * FROM produtos WHERE {$whereFilters} LIMIT {$actualPageLimitInit},{$limit}");
             $stmt->execute();
-
+            
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
@@ -86,33 +86,32 @@
 
         private function performWhereFilters($filters)
         {
-            $whereFilter = '';
+            $whereFilter = array();
 
             foreach($filters as $key => $value)
             {
                 if($key === 'discountTag')
                 {
-                    $whereFilter = "{$key} <= " . intval($value);
+                    array_push(
+                        $whereFilter,
+                        "{$key} BETWEEN " . intval($value) - 10 . " AND " . intval($value)
+                    );
                     continue;
                 }
 
                 if($key === 'productName')
                 {
-                    $whereFilter .= "{$key} LIKE '%{$value}%'";
+                    array_push($whereFilter, "{$key} LIKE '%{$value}%'");
                     continue;
                 }
 
-                if($whereFilter === ''  )
-                {
-                    $whereFilter .= $this->createWhereRegex($key, $value);
-                }
-                else
-                {
-                    $whereFilter .= " AND " . $this->createWhereRegex($key, $value);
-                }
+                array_push(
+                    $whereFilter,
+                    $this->createWhereRegex($key, $value)
+                );
             }
-            
-            return $whereFilter;
+
+            return implode(" AND ", $whereFilter);
         }
 
         private function createWhereRegex($columnName, $valuesToRegexCreate)
