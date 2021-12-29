@@ -2,8 +2,8 @@
     namespace App\Repositories;
 
     use App\Utils\RegisterLog;
-use Error;
-use Exception;
+    use Error;
+    use Exception;
     use PDO;
 
     class ProductsBase extends Database
