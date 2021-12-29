@@ -106,7 +106,7 @@ Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrec
 			"sku": 1,
 			"sellerID": "1",
 			"imageUrl": "https://image.com.br",
-			"detailUrl": "https://detailUrl.com.br",
+			"detailUrl": "/detailUrl/p",
 			"productName": "produto teste1",
 			"discountTag": 20,
 			"listPrice": 3561,
@@ -118,12 +118,12 @@ Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrec
 			"sku": 2,
 			"sellerID": "1",
 			"imageUrl": "https://image.com.br",
-			"detailUrl": "https://detailUrl.com.br",
+			"detailUrl": "/detailUrl/p",
 			"productName": "produto teste2",
 			"discountTag": 20,
 			"listPrice": 3561,
 			"bestPrice": 3099,
-			"productCategories": "Beleza"
+			"productCategories": "Beleza,Emagrecimento,Saúde"
 		}
 	],
 	"pagination": {
@@ -134,6 +134,15 @@ Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrec
 	}
 }
 ```
+
+### Download inicial das informações dos produtos
+
+Para realizar o download das informações de todos os produtos, é necessário requisitar o arquivo de início (initDownload.php) através do navegador ou utilizando do PHP, via terminal, iniciar a execução do arquivo. Após acessar a pasta server basta executar:
+
+> php initDownload.php
+
+O Script será iniciado em ciclos de 500 requisições para não ultrapassar limites de requisições por minuto das APIS utilizadas no desenvolvimento do projeto porém, pode ser adaptado para a necessidade do projeto e com base na limitação de requisições da API a ser utilizada.
+Alguns produtos podem retornar sem a informação de tag de desconto, preço e valor com desconto
 
 ## Tecnologias e Ferramentas
 
