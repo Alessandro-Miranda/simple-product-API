@@ -3,10 +3,10 @@
 
     use App\Utils\RegisterLog;
     use Error;
-    use Exception;
     use PDO;
+use PDOException;
 
-    class ProductsBase extends Database
+class ProductsBase extends Database
     {
         function __construct()
         {
@@ -58,7 +58,7 @@
                 }
 
             }
-            catch(Exception $err)
+            catch(PDOException $err)
             {
                 RegisterLog::RegisterLog(
                     "Database Exception (Insert Transaction)",
