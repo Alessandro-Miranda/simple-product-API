@@ -26,7 +26,6 @@
         {
             $this->explodeQuery($queryString);
             $this->pageExists();
-            
             $this->sendResponse($this->model->filterProductsByQueryString($this->filters, $this->limit, $this->page));
         }
 
@@ -49,10 +48,10 @@
                 }
                 
                 if(
-                    $key !== 'productName' ||
-                    $key !== 'discountTag' ||
-                    $key !== 'productCategories' ||
-                    $key !== 'productID' ||
+                    $key !== 'productName' &&
+                    $key !== 'discountTag' &&
+                    $key !== 'productCategories' &&
+                    $key !== 'productID' &&
                     $key !== 'sku'
                 )
                 {
@@ -66,16 +65,16 @@
         public function paginationInfos()
         {
             return array(
-                "totalProducts" => $this->model->getNumberOfRows(),
+                "totalProducts" => $this->model->getNumberOfRows($this->filters),
                 "actualPage" => $this->page,
-                "totalPages" => $this->model->totalPages($this->limit),
+                "totalPages" => $this->model->totalPages($this->limit, $this->filters),
                 "perPage" => $this->limit
             );
         }
 
         public function pageExists()
         {
-            if($this->model->totalPages($this->limit) < $this->page)
+            if($this->model->totalPages($this->limit, $this->filters) < $this->page)
             {
                 RegisterLog::RegisterLog("Warning", "Página solicitada não encontrada", "warnings.log");
                 ErrorMessages::returnMessageError(404, "Not Found", "Page not found", "Página não existe ou o valor passado é diferente de um número");
