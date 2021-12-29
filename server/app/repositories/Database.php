@@ -48,7 +48,7 @@
             return $result;
         }
 
-        public function filterProducts($filter, $actualPageLimitInit, $limit)
+        public function filterProducts($filter, $actualPageLimitInit, $limit, $count = false)
         {
             if(empty($filter))
             {
@@ -65,11 +65,22 @@
             return $result;
         }
 
-        public function numberOfRows()
+        public function numberOfRows($filters = NULL)
         {
-            $stmt = $this->PDO->query("SELECT COUNT(*) FROM produtos");
-            $stmt->execute();
+            $stmt = "";
 
+            if(!empty($filters))
+            {
+                $whereFilters = $this->performWhereFilters($filters);
+                $stmt = $this->PDO->prepare("SELECT COUNT(*) FROM produtos WHERE {$whereFilters}");
+            }
+            else
+            {
+                $stmt = $this->PDO->prepare("SELECT COUNT(*) FROM produtos");
+            }
+            
+            $stmt->execute();
+            
             return $stmt->fetchColumn();
         }
 
