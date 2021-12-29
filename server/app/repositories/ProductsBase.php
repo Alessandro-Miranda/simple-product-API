@@ -4,9 +4,9 @@
     use App\Utils\RegisterLog;
     use Error;
     use PDO;
-use PDOException;
+    use PDOException;
 
-class ProductsBase extends Database
+    class ProductsBase extends Database
     {
         function __construct()
         {
