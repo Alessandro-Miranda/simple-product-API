@@ -7,3 +7,7 @@ vendor/
 
 #log files
 *.log
+
+#sku and ean files
+eans.txt
+skus.txt
