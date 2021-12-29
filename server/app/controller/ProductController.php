@@ -26,7 +26,13 @@
         {
             $this->explodeQuery($queryString);
             $this->pageExists();
-            $this->sendResponse($this->model->filterProductsByQueryString($this->filters, $this->limit, $this->page));
+            $this->sendResponse(
+                $this->model->filterProductsByQueryString(
+                    $this->filters,
+                    $this->limit,
+                    $this->page
+                )
+            );
         }
 
         public function explodeQuery($query)
