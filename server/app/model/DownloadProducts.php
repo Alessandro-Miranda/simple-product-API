@@ -3,8 +3,8 @@
     
     set_time_limit(3600);
 
-use App\Repositories\ProductsBase;
-use App\Utils\RegisterLog;
+    use App\Repositories\ProductsBase;
+    use App\Utils\RegisterLog;
 
     /**
     * Inicia o download dos produtos e salva no banco
@@ -29,8 +29,6 @@ use App\Utils\RegisterLog;
             $this->appToken = $_ENV["XVTEXAPIAppToken"];
             $this->curl = curl_init();
             $this->counter = 0;
-
-            echo "baixando os produtos... <br />";
         }
 
         /**
@@ -40,7 +38,6 @@ use App\Utils\RegisterLog;
          */
         public function getPriceInformations()
         {   
-            echo "Obtendo as informações de preço<br />";
             foreach($this->skus as $value)
             {
                 $this->prepareRequest("https://{$this->accountName}.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/{$value}");
@@ -53,7 +50,7 @@ use App\Utils\RegisterLog;
                 $pricesDecoded = json_decode($prices, true);
                 $keys = array(0 => "productId");
 
-                if($pricesDecoded === "ProductId not found")
+                if($pricesDecoded === "ProductId not found" || $pricesDecoded === "SKU not found.")
                 {
                     continue;
                 }
@@ -77,8 +74,6 @@ use App\Utils\RegisterLog;
          */
         public function getProductInformations()
         {
-            echo "Buscando as informações adicionais do produto";
-
             foreach($this->eans as $value)
             {
                 $keys = array(
@@ -97,8 +92,16 @@ use App\Utils\RegisterLog;
                 $this->checkError("Error downloading products", $error);
 
                 $jsonDecoded = json_decode($infos, true);
+
+                if($jsonDecoded === "ProductId not found" || $jsonDecoded === "SKU not found.")
+                {
+                    continue;
+                }
                 
-                array_push($this->products, $this->setProductInformations($keys, $jsonDecoded, $this->productsPrice));
+                array_push(
+                    $this->products,
+                    $this->setProductInformations($keys, $jsonDecoded, $this->productsPrice)
+                );
 
                 $this->clearVariables($jsonDecoded);
                 $this->sleep();
@@ -111,7 +114,7 @@ use App\Utils\RegisterLog;
         {
             $db = new ProductsBase();
 
-            $db->insert($this->products, "produtos");
+            $db->insert(array_unique($this->products, SORT_REGULAR), "produtos");
         }
 
         /**
@@ -136,7 +139,9 @@ use App\Utils\RegisterLog;
             // Preenche os valores nas chaves passadas no paramêtro
             foreach($keys as $keyValue)
             {
-                $formatedKey = $internalLoopType === "ProductInfos" ? ucfirst($keyValue) : $keyValue;
+                $formatedKey = $internalLoopType === "ProductInfos"
+                    ? ucfirst($keyValue)
+                    : $keyValue;
 
                 if($keyValue === "productCategories")
                 {
@@ -152,9 +157,10 @@ use App\Utils\RegisterLog;
                 // Insere nas informações temporárias do produto os preços e descontos
                 foreach($internalArray as $sku)
                 {
-                    $discountTag = $sku["listPrice"] !== 0 ? round(100 - ($sku["bestPrice"] / $sku["listPrice"]) * 100) : 0;
+                    $discountTag = $sku["listPrice"] !== 0
+                        ? round(100 - ($sku["bestPrice"] / $sku["listPrice"]) * 100)
+                        : 0;
 
-                    $productInformation["sellerID"] = $sku["sellerId"];
                     $productInformation["listPrice"] = $sku["listPrice"];
                     $productInformation["bestPrice"] = $sku["bestPrice"];
                     $productInformation["discountTag"] = $discountTag;
@@ -181,6 +187,8 @@ use App\Utils\RegisterLog;
                 }
             }
 
+            $productInformation["sellerID"] = "1";
+
             return $productInformation;
         }
 
@@ -194,7 +202,6 @@ use App\Utils\RegisterLog;
         {
             if($this->counter === 500)
             {
-                echo "Aguardando o script reiniciar";
                 $this->counter=0;
                 sleep(20);
             }
@@ -215,7 +222,6 @@ use App\Utils\RegisterLog;
         {
             if($error)
             {
-                echo "Ocorreu um erro, cheque os logs para maiores informações";
                 RegisterLog::RegisterLog($message, $error, "exceptions.log");
                 exit();
             }
