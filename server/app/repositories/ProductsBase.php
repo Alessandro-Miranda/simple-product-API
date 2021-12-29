@@ -27,21 +27,25 @@
                     $columns = "";
                     $columnValues = "";
 
-                    array_walk($actualItem, function($item, $key) use (&$columns, &$columnValues, &$counter, &$lenght) {
+                    // Separa as chaves do array como coluna da tabela e os valores para criar a query de insert
+                    array_walk(
+                        $actualItem,
+                        function($item, $key) use (&$columns, &$columnValues, &$counter, &$lenght) {
                         
-                        if($counter >= $lenght - 1)
-                        {
-                            $columns .= $key;
-                            $columnValues .= gettype($item) === "string" ? "'{$item}'" : $item;
-                        }
-                        else
-                        {
-                            $columns .= "{$key},";
-                            $columnValues .= gettype($item) === "string" ? "'{$item}'," : "{$item},";
-                        }
+                            if($counter >= $lenght - 1)
+                            {
+                                $columns .= $key;
+                                $columnValues .= gettype($item) === "string" ? "'{$item}'" : $item;
+                            }
+                            else
+                            {
+                                $columns .= "{$key},";
+                                $columnValues .= gettype($item) === "string" ? "'{$item}'," : "{$item},";
+                            }
 
-                        $counter++;
-                    });
+                            $counter++;
+                        }
+                    );
 
                     $stmt = "INSERT INTO {$tableName} ({$columns}) VALUES ({$columnValues})";
                     
