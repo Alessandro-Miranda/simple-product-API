@@ -11,7 +11,6 @@
         function __construct()
         {
             parent::__construct();
-            echo "inserindo os produtos no banco de dados";
         }
 
         public function insert($values, $tableName)
@@ -52,11 +51,9 @@
                 if($this->PDO->commit())
                 {
                     RegisterLog::RegisterLog("Insert completion", "Produtos inseridos no banco", "Insert-infos.log");
-                    echo "Produtos baixados <br />";
                 }
                 else
                 {
-                    echo "Ocorreu um erro <br />";
                     throw new Error("Erro ao commitar a transação");
                 }
 
@@ -70,6 +67,7 @@
                 );
 
                 $this->PDO->rollBack();
+                exit();
             }
         }
     }
