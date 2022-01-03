@@ -1,20 +1,19 @@
 <?php
-    namespace App\Utils;
+namespace App\Utils;
 
-    class ErrorMessages
+class ErrorMessages
+{
+    public static function returnMessageError($code, $header, $error, $message = 'Erro ao buscar/filtrar os produtos')
     {
-        public static function returnMessageError($code, $header, $error, $message = 'Erro ao buscar/filtrar os produtos')
-        {
-            header("HTTP/1.1 {$code} ${header}");
-            
-            $message = array(
-                "code" => $code,
-                "message" => $message,
-                "error" => $error
-            );
+        header("HTTP/1.1 {$code} ${header}");
+        
+        $message = array(
+            "code" => $code,
+            "message" => $message,
+            "error" => $error
+        );
 
-            echo json_encode($message, JSON_UNESCAPED_SLASHES);
-            exit();
-        }
+        echo json_encode($message, JSON_UNESCAPED_SLASHES);
+        exit();
     }
-?>
+}
