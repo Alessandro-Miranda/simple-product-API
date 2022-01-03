@@ -23,7 +23,6 @@
         "server": [
             "Composer\\Config::disableProcessTimeout",
             "php -S localhost:80"
-        ],
-        "test": ".\\vendor\\bin\\phpunit"
+        ]
     }
 }
