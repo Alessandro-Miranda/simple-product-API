@@ -1,78 +1,78 @@
 <?php
-    namespace App\Repositories;
 
-    use App\Utils\RegisterLog;
-    use Error;
-    use PDO;
-    use PDOException;
+namespace App\Repositories;
 
-    class ProductsBase extends Database
+use App\Utils\RegisterLog;
+use Error;
+use PDO;
+use PDOException;
+
+class ProductsBase extends Database
+{
+    function __construct()
     {
-        function __construct()
-        {
-            parent::__construct();
-        }
+        parent::__construct();
+    }
 
-        public function insert($values, $tableName)
+    public function insert($values, $tableName)
+    {
+        try
         {
-            try
+            $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->PDO->beginTransaction();
+
+            foreach($values as $actualItem)
             {
-                $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->PDO->beginTransaction();
+                $lenght = count($actualItem);
+                $counter = 0;
+                $columns = "";
+                $columnValues = "";
 
-                foreach($values as $actualItem)
-                {
-                    $lenght = count($actualItem);
-                    $counter = 0;
-                    $columns = "";
-                    $columnValues = "";
-
-                    // Separa as chaves do array como coluna da tabela e os valores para criar a query de insert
-                    array_walk(
-                        $actualItem,
-                        function($item, $key) use (&$columns, &$columnValues, &$counter, &$lenght) {
-                        
-                            if($counter >= $lenght - 1)
-                            {
-                                $columns .= $key;
-                                $columnValues .= gettype($item) === "string" ? "'{$item}'" : $item;
-                            }
-                            else
-                            {
-                                $columns .= "{$key},";
-                                $columnValues .= gettype($item) === "string" ? "'{$item}'," : "{$item},";
-                            }
-
-                            $counter++;
-                        }
-                    );
-
-                    $stmt = "INSERT INTO {$tableName} ({$columns}) VALUES ({$columnValues})";
+                // Separa as chaves do array como coluna da tabela e os valores para criar a query de insert
+                array_walk(
+                    $actualItem,
+                    function($item, $key) use (&$columns, &$columnValues, &$counter, &$lenght) {
                     
-                    $this->PDO->exec($stmt);
-                }
+                        if($counter >= $lenght - 1)
+                        {
+                            $columns .= $key;
+                            $columnValues .= gettype($item) === "string" ? "'{$item}'" : $item;
+                        }
+                        else
+                        {
+                            $columns .= "{$key},";
+                            $columnValues .= gettype($item) === "string" ? "'{$item}'," : "{$item},";
+                        }
 
-                if($this->PDO->commit())
-                {
-                    RegisterLog::RegisterLog("Insert completion", "Produtos inseridos no banco", "Insert-infos.log");
-                }
-                else
-                {
-                    throw new Error("Erro ao commitar a transação");
-                }
-
-            }
-            catch(PDOException $err)
-            {
-                RegisterLog::RegisterLog(
-                    "Database Exception (Insert Transaction)",
-                    $err->getMessage(),
-                    "exceptions.log"
+                        $counter++;
+                    }
                 );
 
-                $this->PDO->rollBack();
-                exit();
+                $stmt = "INSERT INTO {$tableName} ({$columns}) VALUES ({$columnValues})";
+                
+                $this->PDO->exec($stmt);
             }
+
+            if($this->PDO->commit())
+            {
+                RegisterLog::RegisterLog("Insert completion", "Produtos inseridos no banco", "Insert-infos.log");
+            }
+            else
+            {
+                throw new Error("Erro ao commitar a transação");
+            }
+
+        }
+        catch(PDOException $err)
+        {
+            RegisterLog::RegisterLog(
+                "Database Exception (Insert Transaction)",
+                $err->getMessage(),
+                "exceptions.log"
+            );
+
+            $this->PDO->rollBack();
+            exit();
         }
     }
-?>
+}
