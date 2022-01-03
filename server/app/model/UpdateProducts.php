@@ -3,13 +3,9 @@ namespace App\Model;
 
 use App\Repositories\Database;
 use App\Repositories\UpdateProducts as RepositoriesUpdateProducts;
-use App\Utils\RegisterLog;
-use PDOException;
 
 class UpdateProducts extends DownloadProducts
 {
-    private $db;
-
     function __construct()
     {
         parent::__construct();
