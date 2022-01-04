@@ -3,9 +3,9 @@ namespace App\Model;
 
 set_time_limit(3600);
 
+use App\Interfaces\IDownloadProducts;
 use App\Repositories\ProductsBase;
 use App\Utils\RegisterLog;
-use IDownloadProducts;
 
 /**
 * Inicia o download dos produtos e salva no banco
