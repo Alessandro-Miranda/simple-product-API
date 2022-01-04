@@ -3,10 +3,11 @@ namespace App\Repositories;
 
 use App\Utils\ErrorMessages;
 use App\Utils\RegisterLog;
+use IDatabaseRepository;
 use PDO;
 use PDOException;
 
-class Database
+class Database implements IDatabaseRepository
 {
     public $PDO;
     
@@ -33,12 +34,24 @@ class Database
         }
     }
 
-    public function getConnection()
+    /**
+     * Obtém a instância de acesso ao banco
+     *
+     * @return PDO
+     */
+    public function getConnection(): PDO
     {
         return $this->PDO;
     }
 
-    public function findAllProducts($actualPageLimitInit, $limit)
+    /**
+     * Encontra todos os produtos limitando a busca com os valores passados
+     *
+     * @param int $actualPageLimitInit
+     * @param int $limit
+     * @return array|false
+     */
+    public function findAllProducts($actualPageLimitInit, $limit): array|false
     {
         $stmt = $this->PDO->prepare("SELECT * FROM produtos LIMIT $actualPageLimitInit,$limit");
         $stmt->execute();
@@ -48,7 +61,15 @@ class Database
         return $result;
     }
 
-    public function filterProducts($filter, $actualPageLimitInit, $limit, $count = false)
+    /**
+     * Filtra os produtos com base na query string passada
+     *
+     * @param array $filter
+     * @param int   $actualPageLimitInit
+     * @param int   $limit
+     * @return array|false
+     */
+    public function filterProducts($filter, $actualPageLimitInit, $limit): array|false
     {
         if(empty($filter))
         {
@@ -65,7 +86,13 @@ class Database
         return $result;
     }
 
-    public function numberOfRows($filters = NULL)
+    /**
+     * Verifica a quantidade de linhas para o resultado buscado via query string ou de todos os registros do banco
+     *
+     * @param array $filters
+     * @return mixed
+     */
+    public function numberOfRows($filters): mixed
     {
         $stmt = "";
 
@@ -87,10 +114,10 @@ class Database
     /**
      * Cria a clausula where para realizar o filtro especificado na queryString passada
      *
-     * @param [array] $filters
+     * @param array $filters
      * @return string
      */
-    private function performWhereFilters($filters)
+    private function performWhereFilters($filters): string
     {
         $whereFilter = array();
 
@@ -120,8 +147,15 @@ class Database
         return implode(" AND ", $whereFilter);
     }
 
-    private function createWhereRegex($columnName, $valuesToRegexCreate)
+    /**
+     * Cria a regex responsável por encontrar os produtos pertencentes à categoria solicitada pois um produtos pode ter diversas categorias registradas
+     *
+     * @param string $columnName
+     * @param string $valuesToRegexCreate
+     * @return void
+     */
+    private function createWhereRegex($columnName, $valuesToCreateRegex)
     {
-        return "{$columnName} REGEXP '" . implode("|", explode(" ", $valuesToRegexCreate)) . "'";
+        return "{$columnName} REGEXP '" . implode("|", explode(" ", $valuesToCreateRegex)) . "'";
     }
 }
