@@ -46,11 +46,10 @@ class ProductsBase extends Database implements IProductsBase
                     }
                 );
 
-                $teste1 = implode(",", $columns);
-                $teste2 = implode(",", $columnValues);
-                echo "INSERT INTO {$tableName} ({$teste1}) VALUES ({$teste2})";
-                exit();
-                $stmt = "INSERT INTO {$tableName} ({$columns}) VALUES ({$columnValues})";
+                $columnsImploded = implode(",", $columns);
+                $valuesImploded = implode(",", $columnValues);
+                
+                $stmt = "INSERT INTO {$tableName} ({$columnsImploded}) VALUES ({$valuesImploded})";
                 
                 $this->PDO->exec($stmt);
             }
