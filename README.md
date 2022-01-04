@@ -15,23 +15,29 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 ## Entregáveis
 
 - Base de dados de produtos; :white_check_mark:
-- Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :construction:
-- CronJob para rodar as atualizações conforme a necessidade do projeto; :construction:
-- API REST responsável por servir as informações para o front
+- Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :white_check_mark:
+- Aplicação responsável por servir as informações dos produtos
 - Layout sugerido da página de produtos; :construction:
 
 ## Features
 
-- **Back**
+- **Server**
     - [x] Download de informações de produtos
-    - [ ] Atualização das informações dos produtos
-    - [x] Aplicação para retornar os produtos com base nos filtros solicitados
-- **Front**
+    - [x] Atualização das informações dos produtos
+	- [x] Aplicação responsável por retornar os produtos filtrados
+		- [x] Retorno de todos os produtos
+		- [x] Retorno com limite de produtos
+		- [x] Paginação
+		- [x] Filtro por sku
+		- [x] Filtro por id do produto
+		- [x] Filtro por nome do produto
+		- [x] Filtro por tag de desconto
+- **Client**
     - [ ] Criação da interface
 
 ## Pré-requisitos
 
-Para o desenvolvimento do projeto, primeiramente é necessário ter em sua máquina o [Composer](https://getcomposer.org/), algum servidor como [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou o [servidor embutido do PHP](https://www.php.net/downloads.php) instalado e, também, algum banco de dados.
+Tenha certeza de ter instalado em sua máquina o [Composer](https://getcomposer.org/), algum servidor como [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou o [servidor embutido do PHP](https://www.php.net/downloads.php) instalado e, também, algum banco de dados - o Banco utilizado pelo projeto foi o mySQL.
 
 ## Inicialização
 
@@ -41,11 +47,11 @@ Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, ent
 
 >cd server && php composer.phar install
 
-Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código. Para baixar os produtos e atualizar, será necessário atualizar o código existente conforme a necessidade da plataforma utilizada e os endpoints necessários. O projeto atual foi feito utilizando a plataforma VTEX, portanto, é necessário ter os arquivos *ean.txt* e *sku.txt* para obter as informações necessárias dos produtos.
+Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código. Para baixar os produtos e atualizá-los, será necessário atualizar o código existente conforme a necessidade da plataforma utilizada e os endpoints necessários. O projeto atual foi feito utilizando a plataforma VTEX, portanto, é necessário ter os arquivos *ean.txt* e *sku.txt* para obter as informações necessárias dos produtos.
 
 ### Servidor de desenvolvimento
 
-Para dar início ao servidor de desenvolvimento basta seguir os passos do servidor utilizado ou, caso utilize o servidor embutido do PHP, basta rodar, no terminal, o comando para que seja iniciado o servidor em modo de desenvolvimento.
+Para dar início ao servidor de desenvolvimento basta seguir os passos do servidor utilizado ou, caso utilize o servidor embutido do PHP, basta rodar, no terminal, o comando abaixo para que seja iniciado o servidor.
 
 >composer server
 
@@ -63,18 +69,18 @@ Com o servidor iniciado já será possível acessar os produtos disponíveis na 
 
 Todos os produtos são identificados pelo productID e, também, pelo seu sku. Todos os produtos tem as seguintes propriedades
 
-Campo                |  Descrição
--------------------- | --------------------
-productID            |   Id único do produto
-sku                  |   Sku do produto - identificador único junto (geralmente é o mesmo valor que o productID)
-sellerID             |   String contendo o identificador do seller do produto (o valor padrão do seller é 1)
-imageUrl             |   Url da imagem do produto
-detailUrl            |   Url da página do produto
-productName:         |   Nome do produto
-discountTag:         |   Tag de desconto com base no valor De/Por
-listPrice:           |   Preço original (De)
-bestPrice:           |   Preço com desconto, se houver (Por)
-productCategories:   |   Lista de categorias a que o produto pertence
+Campo                | Tipo					| Descrição
+-------------------- | ---------------------|-------------------------
+productID            | integer				| Id único do produto
+sku                  | integer				| Sku do produto - identificador único junto (geralmente é o mesmo valor que o productID)
+sellerID             | string 				| contendo o identificador do seller do produto (o valor padrão do seller é 1)
+imageUrl             | string				| Url da imagem do produto
+detailUrl            | string				| Url da página do produto
+productName:         | string				| Nome do produto
+discountTag:         | string				| Tag de desconto com base no valor De/Por
+listPrice:           | integer				| Preço original (De)
+bestPrice:           | integer				| Preço com desconto, se houver (Por)
+productCategories:   | string				| Lista de categorias a que o produto pertence
 
 ## Uso
 
@@ -137,11 +143,11 @@ Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrec
 
 ### Download inicial das informações dos produtos
 
-Para realizar o download das informações de todos os produtos, é necessário requisitar o arquivo de início (initDownload.php) através do navegador ou utilizando do PHP, via terminal, iniciar a execução do arquivo. Após acessar a pasta server basta executar:
+Para realizar o download das informações de todos os produtos, é necessário executar o arquivo de início (initDownload.php) através do navegador ou via CLI, e iniciar a execução do arquivo. Utilizando a CLI do PHP basta executar o comando:
 
 > php initDownload.php
 
-O Script será iniciado em ciclos de 500 requisições para não ultrapassar limites de requisições por minuto das APIS utilizadas no desenvolvimento do projeto porém, pode ser adaptado para a necessidade do projeto e com base na limitação de requisições da API a ser utilizada.
+O Script será iniciado em ciclos de 500 requisições para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto porém, pode ser adaptado para a necessidade do projeto e com base na limitação de requisições da API a ser utilizada.
 Alguns produtos podem retornar sem a informação de tag de desconto, preço e valor com desconto
 
 ## Tecnologias e Ferramentas
