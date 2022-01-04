@@ -1,17 +1,16 @@
 <?php
 
-    use App\Model\DownloadProducts;
-    use Dotenv\Dotenv;
+use App\Model\DownloadProducts;
+use Dotenv\Dotenv;
 
-    require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
-    $dotenv = Dotenv::createImmutable(__DIR__);
-    $dotenv->safeLoad();
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
 
-    $download = new DownloadProducts();
+$download = new DownloadProducts();
 
-    $download
-        ->getPriceInformations()
-        ->getProductInformations()
-        ->saveProducts();
-?>
+$download
+    ->getPriceInformations()
+    ->getProductInformations()
+    ->saveProducts();

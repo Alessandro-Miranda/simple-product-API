@@ -1,38 +1,37 @@
 <?php
-    require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
-    use App\Controller\ProductController;
-    use Dotenv\Dotenv;
+use App\Controller\ProductController;
+use Dotenv\Dotenv;
 
-    $dotenv = Dotenv::createImmutable(__DIR__);
-    $dotenv->safeLoad();
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST')
-    {
-        header("HTTP/1.1 405 Method Not Allowed");
-        exit();
-    }
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    header("HTTP/1.1 405 Method Not Allowed");
+    exit();
+}
 
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    $hasProductPath = array_search('products', explode('/', $uri));
-    
-    if($hasProductPath === false)
-    {
-        header("HTTP/1.1 404 Not Found");
-        exit();
-    }
+$hasProductPath = array_search('products', explode('/', $uri));
 
-    $queryString = $_SERVER['QUERY_STRING'];
+if($hasProductPath === false)
+{
+    header("HTTP/1.1 404 Not Found");
+    exit();
+}
 
-    $productController = new ProductController();
+$queryString = $_SERVER['QUERY_STRING'];
 
-    if(empty($queryString))
-    {
-        $productController->getAllProducts();
-    }
-    else
-    {
-        $productController->filterProducts($queryString);
-    }
-?>
+$productController = new ProductController();
+
+if(empty($queryString))
+{
+    $productController->getAllProducts();
+}
+else
+{
+    $productController->filterProducts($queryString);
+}
