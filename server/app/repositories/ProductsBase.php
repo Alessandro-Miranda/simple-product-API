@@ -4,17 +4,25 @@ namespace App\Repositories;
 
 use App\Utils\RegisterLog;
 use Error;
+use IProductsBase;
 use PDO;
 use PDOException;
 
-class ProductsBase extends Database
+class ProductsBase extends Database implements IProductsBase
 {
     function __construct()
     {
         parent::__construct();
     }
 
-    public function insert($values, $tableName)
+    /**
+     * Realiza a inserção dos produtos no banco
+     *
+     * @param array  $values
+     * @param string $tableName
+     * @return void
+     */
+    public function insertProducts($values, $tableName): void
     {
         try
         {
