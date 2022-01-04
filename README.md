@@ -169,4 +169,4 @@ A atualização dos produtos funciona de forma similiar ao download, bastando in
 
 ## Licença
 
-Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE.md) para detalhes
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE.md) para detalhes.
