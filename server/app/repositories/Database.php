@@ -88,13 +88,62 @@ class Database implements IDatabaseRepository
     }
 
     /**
+     * Verifica se o produto já existe na base e se não existir, insere
+     *
+     * @param int $productID
+     * @param array $columnsAndValues
+     * @return mixed
+     */
+    public function insertIfProductNotExists(int $productID, array $columnsAndValues): mixed
+    {
+        $columns = array();
+        $valuesFormatedToSelect = array();
+        
+        foreach($columnsAndValues as $key => $value)
+        {
+            $formatedValue = gettype($value) === "string" ? "'{$value}'" : $value;
+            array_push($valuesFormatedToSelect, "{$formatedValue} as {$key}");
+            array_push($columns, $key);
+        }
+
+        $valuesToSelectImploded = implode(",", $valuesFormatedToSelect);
+        $columnsImploded = implode(",", $columns);
+
+        $stmt = $this->PDO->prepare("INSERT INTO produtos({$columnsImploded}) SELECT * FROM (SELECT {$valuesToSelectImploded}) as tmp WHERE NOT EXISTS (SELECT productID FROM produtos WHERE productID={$productID})");
+
+        $stmt->execute();
+        
+        return $stmt->fetchColumn();
+    }
+
+    /**
      * Atualiza os produtos já existentes e, caso não exista, insere na base
      *
      * @param array $products
      * @return void
      */
-    public function updateProducts($products): void
+    public function updateProducts(array $products): void
     {
+
+        foreach($products as $key => $value)
+        {
+            try
+            {
+                $result = $this->insertIfProductNotExists($value["productID"], $value);
+                
+                if($result === 1)
+                {
+                    unset($products[$key]);
+                }
+            }
+            catch(PDOException $err)
+            {
+                $errorMessage = $err->getMessage() . " On product insert if no exist products";
+                RegisterLog::RegisterLog('error', $errorMessage, 'update-info.log');
+                continue;
+            }
+        }
+
         try
         {
             $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
