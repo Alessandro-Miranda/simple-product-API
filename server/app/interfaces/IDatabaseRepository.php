@@ -37,7 +37,7 @@ interface IDatabaseRepository
      * @param array $columnsAndValues
      * @return mixed
      */
-    public function insertIfProductNotExists(int $productID, array $columnsAndValues): mixed;
+    public function insertProductIfNotExists(int $productID, array $columnsAndValues): mixed;
 
     /**
      * Atualiza os produtos já existentes e, caso não exista, insere na base

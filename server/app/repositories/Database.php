@@ -94,7 +94,7 @@ class Database implements IDatabaseRepository
      * @param array $columnsAndValues
      * @return mixed
      */
-    public function insertIfProductNotExists(int $productID, array $columnsAndValues): mixed
+    public function insertProductIfNotExists(int $productID, array $columnsAndValues): mixed
     {
         $columns = array();
         $valuesFormatedToSelect = array();
@@ -129,7 +129,7 @@ class Database implements IDatabaseRepository
         {
             try
             {
-                $result = $this->insertIfProductNotExists($value["productID"], $value);
+                $result = $this->insertProductIfNotExists($value["productID"], $value);
                 
                 if($result === 1)
                 {
