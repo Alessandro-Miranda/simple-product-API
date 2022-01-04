@@ -114,16 +114,15 @@ class DownloadProducts
     {
         $db = new ProductsBase();
 
-        $db->insert(array_unique($this->products, SORT_REGULAR), "produtos");
+        $db->insertProducts(array_unique($this->products, SORT_REGULAR), "produtos");
     }
 
     /**
-     * Preenche as informações de preço em um array temporário e, também, repassa as informações finais
-     * para o array com todas as informações do produto e limpa as chaves do array temporário
+     * Preenche as informações de preço em um array temporário e, também, repassa as informações finais para o array com todas as informações do produto e limpa as chaves do array temporário
      *
-     * @param [array] $keys
-     * @param [array] $json
-     * @param [array] $internalArray
+     * @param array  $keys
+     * @param array  $json
+     * @param array  $internalArray
      * @param string $internalLoopType
      * @return array
      */
@@ -214,8 +213,8 @@ class DownloadProducts
     /**
      * Verifica se a houve algum erro na requisição e, caso tenha, registra o log e finaliza a execução
      *
-     * @param [string] $message
-     * @param [Error] $error
+     * @param string $message
+     * @param Error  $error
      * @return void
      */
     private function checkError($message, $error)
@@ -230,7 +229,7 @@ class DownloadProducts
     /**
      * Prepara a requisição a ser feita
      *
-     * @param [string] $url
+     * @param string $url
      * @return void
      */
     private function prepareRequest($url)
