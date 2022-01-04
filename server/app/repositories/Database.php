@@ -1,10 +1,10 @@
 <?php
 namespace App\Repositories;
 
+use App\Interfaces\IDatabaseRepository;
 use App\Utils\ErrorMessages;
 use App\Utils\RegisterLog;
 use Error;
-use IDatabaseRepository;
 use PDO;
 use PDOException;
 
