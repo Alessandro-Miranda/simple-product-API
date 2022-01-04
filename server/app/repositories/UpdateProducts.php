@@ -14,7 +14,7 @@ class UpdateProducts extends Database
         parent::__construct();
     }
 
-    function update($products)
+    public function update($products)
     {
         try
         {
