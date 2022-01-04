@@ -160,7 +160,7 @@ class DownloadProducts implements IDownloadProducts
         if($internalLoopType === "ProductPrice")
         {
             // Insere nas informações temporárias do produto os preços e descontos
-            foreach($internalArray as $sku)
+            foreach($internalArray as $internalKey => $sku)
             {
                 $discountTag = $sku["listPrice"] !== 0
                     ? round(100 - ($sku["bestPrice"] / $sku["listPrice"]) * 100)
@@ -170,7 +170,7 @@ class DownloadProducts implements IDownloadProducts
                 $productInformation["bestPrice"] = $sku["bestPrice"];
                 $productInformation["discountTag"] = $discountTag;
 
-                $this->clearVariables($sku);
+                $this->clearVariables($internalArray[$internalKey]);
             }
         }
         else
