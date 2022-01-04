@@ -1,10 +1,10 @@
 <?php
 namespace App\Model;
 
+use App\Interfaces\IProductGateway;
 use App\Repositories\Database;
 use App\Utils\ErrorMessages;
 use App\Utils\RegisterLog;
-use IProductGateway;
 
 class ProductGateway implements IProductGateway
 {
