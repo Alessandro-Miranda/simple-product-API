@@ -106,38 +106,38 @@ Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrec
 
 ```json
 {
-	"data": [
-		{
-			"productID": 1,
-			"sku": 1,
-			"sellerID": "1",
-			"imageUrl": "https://image.com.br",
-			"detailUrl": "/detailUrl/p",
-			"productName": "produto teste1",
-			"discountTag": 20,
-			"listPrice": 3561,
-			"bestPrice": 3099,
-			"productCategories": "Emagrecimento"
-		},
-		{
-			"productID": 2,
-			"sku": 2,
-			"sellerID": "1",
-			"imageUrl": "https://image.com.br",
-			"detailUrl": "/detailUrl/p",
-			"productName": "produto teste2",
-			"discountTag": 20,
-			"listPrice": 3561,
-			"bestPrice": 3099,
-			"productCategories": "Beleza,Emagrecimento,Saúde"
-		}
-	],
-	"pagination": {
-		"totalProducts": 21,
-		"actualPage": 1,
-		"totalPages": 11,
-		"perPage": 2
+  "data": [
+	{
+	  "productID": 1,
+	  "sku": 1,
+	  "sellerID": "1",
+	  "imageUrl": "https://image.com.br",
+	  "detailUrl": "/detailUrl/p",
+	  "productName": "produto teste1",
+	  "discountTag": 20,
+	  "listPrice": 3561,
+	  "bestPrice": 3099,
+	  "productCategories": "Emagrecimento"
+	},
+	{
+	  "productID": 2,
+	  "sku": 2,
+	  "sellerID": "1",
+	  "imageUrl": "https://image.com.br",
+	  "detailUrl": "/detailUrl/p",
+	  "productName": "produto teste2",
+	  "discountTag": 20,
+	  "listPrice": 3561,
+	  "bestPrice": 3099,
+	  "productCategories": "Beleza,Emagrecimento,Saúde"
 	}
+  ],
+  "pagination": {
+    "totalProducts": 21,
+	"actualPage": 1,
+	"totalPages": 11,
+	"perPage": 2
+  }
 }
 ```
 
