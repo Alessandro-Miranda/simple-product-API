@@ -76,11 +76,11 @@ sku                  | integer				| Sku do produto - identificador único junto 
 sellerID             | string 				| contendo o identificador do seller do produto (o valor padrão do seller é 1)
 imageUrl             | string				| Url da imagem do produto
 detailUrl            | string				| Url da página do produto
-productName:         | string				| Nome do produto
-discountTag:         | string				| Tag de desconto com base no valor De/Por
-listPrice:           | integer				| Preço original (De)
-bestPrice:           | integer				| Preço com desconto, se houver (Por)
-productCategories:   | string				| Lista de categorias a que o produto pertence
+productName          | string				| Nome do produto
+discountTag          | string				| Tag de desconto com base no valor De/Por
+listPrice            | integer				| Preço original (De)
+bestPrice            | integer				| Preço com desconto, se houver (Por)
+productCategories    | string				| Lista de categorias a que o produto pertence
 
 ## Uso
 
