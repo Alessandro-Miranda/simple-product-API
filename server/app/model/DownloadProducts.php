@@ -169,6 +169,8 @@ class DownloadProducts implements IDownloadProducts
                 $productInformation["listPrice"] = $sku["listPrice"];
                 $productInformation["bestPrice"] = $sku["bestPrice"];
                 $productInformation["discountTag"] = $discountTag;
+
+                $this->clearVariables($sku);
             }
         }
         else
@@ -186,13 +188,11 @@ class DownloadProducts implements IDownloadProducts
                     $productInformation["bestPrice"] = $price["bestPrice"];
                     $productInformation["discountTag"] = $price["discountTag"];
 
-                    unset($internalArray[$key]);
+                    $this->clearVariables($internalArray[$key]);
                     break;
                 }
             }
         }
-
-        $productInformation["sellerID"] = "1";
 
         return $productInformation;
     }
