@@ -31,6 +31,15 @@ interface IDatabaseRepository
     public function filterProducts(array $filter, int $actualPageLimitInit, int $limit): array|false;
 
     /**
+     * Verifica se o produto já existe na base e se não existir, insere
+     *
+     * @param int $productID
+     * @param array $columnsAndValues
+     * @return mixed
+     */
+    public function insertIfProductNotExists(int $productID, array $columnsAndValues): mixed;
+
+    /**
      * Atualiza os produtos já existentes e, caso não exista, insere na base
      *
      * @param array $products
