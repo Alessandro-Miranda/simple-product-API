@@ -21,7 +21,7 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 
 ## Features
 
-- **Server**
+- **Back**
     - [x] Download de informações de produtos
     - [x] Atualização das informações dos produtos
 	- [x] Aplicação responsável por retornar os produtos filtrados
@@ -32,8 +32,8 @@ O principal objetivo do projeto é criar uma base de dados com as informações 
 		- [x] Filtro por id do produto
 		- [x] Filtro por nome do produto
 		- [x] Filtro por tag de desconto
-- **Client**
-    - [ ] Criação da interface
+- **Front**
+    - [ ] Criação da interface de exemplo
 
 ## Pré-requisitos
 
