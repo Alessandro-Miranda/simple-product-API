@@ -55,7 +55,7 @@ Para dar início ao servidor de desenvolvimento basta seguir os passos do servid
 
 >composer server
 
-Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da rota */products*, através da aplicação front que esteja sendo construída ou utilizando alguma ferramenta como, por exemplo, o [Insomnia](https://insomnia.rest/download) ou [Postman](https://www.postman.com/). As informações possíveis de serem passadas via Query String são:
+Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da rota */products*. As informações possíveis de serem passadas para a rota via Query String são:
 
 - *limit* - Limite de itens retornados em cada página
 - *page* - página de exibição de produtos
@@ -90,19 +90,19 @@ _obs: Por padrão o limite de produtos retornados é 10 e o máximo é 100 e a p
 
 Para Realizar os filtros basta utilizar as querys no seguinte formato:
 
-- [https://{Your-url-here}/products]() = Retorna todos os produtos, retornando a primeira página limitando em 10 produtos
-- [https://{Your-url-here}/products?productName=some%20%product]() = Retorna os produtos que contenham o nome passado
-- [https://{Your-url-here}/products?discountTag=40]() = Retorna os produtos que estejam em uma faixa de desconto menor ou igual a passada na query
-- [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude]() = Retorna os produtos que pertençam à categoria passada
-- [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=20]() = Limita o resultado da busca, com base no valor passado, de itens por página; respeitando o máximo de 100 itens por página.
-- [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&page=2]() = Solicita a página 2 da listagem de produtos
-- [https://{Your-url-here}/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2]() = Filtra todos os produtos com valor de desconto menor ou igual ao passado e que pertençam à categoria, limitando a quantidade de retorno e página solicitada
+- _**/products**_ : Retorna todos os produtos, retornando a primeira página limitando em 10 produtos
+- _**/products?productName=some%20%product**_ : Retorna os produtos que contenham o nome passado
+- _**/products?discountTag=40**_ : Retorna os produtos que estejam em uma faixa de desconto menor ou igual a passada na query
+- _**/products?productCategories=Emagrecimento+beleza+saude**_ = Retorna os produtos que pertençam à categoria passada
+- _**/products?productCategories=Emagrecimento+beleza+saude&limit=20**_ : Limita o resultado da busca, com base no valor passado, de itens por página; respeitando o máximo de 100 itens por página.
+- _**/products?productCategories=Emagrecimento+beleza+saude&page=2**_ : Solicita a página 2 da listagem de produtos
+- _**/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2**_ : Filtra todos os produtos com valor de desconto menor ou igual ao passado e que pertençam à categoria, limitando a quantidade de retorno e página solicitada
 
 _O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre associado a eles o valor 10 e 1, respectivamente._
 
 ### Exemplo de retorno
 
-Ao solicitar a url - [https://{Your-url-here}/products?productCategories=Emagrecimento+beleza+saude&limit=2](), o retorno será como o exemplo abaixo
+Ao solicitar a url - _**/products?productCategories=Emagrecimento+beleza+saude&limit=2**_, o retorno será como o exemplo a seguir
 
 ```json
 {
@@ -147,8 +147,8 @@ Para realizar o download das informações de todos os produtos, é necessário 
 
 > php initDownload.php
 
-O Script será iniciado em ciclos de 500 requisições para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto porém, pode ser adaptado para a necessidade do projeto e com base na limitação de requisições da API a ser utilizada.
-Alguns produtos podem retornar sem a informação de tag de desconto, preço e valor com desconto
+O Script será iniciado em ciclos de 500 requisições e pausa de 20 segundos para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto.
+_Alguns produtos podem retornar sem a informação de tag de desconto, valor e valor com desconto._
 
 ### Atualização dos produtos
 
