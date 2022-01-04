@@ -1,4 +1,4 @@
-# Listagem de produtos + Página de produtos 
+# Listagem de produtos + Página de produtos
 
 ### Status do projeto
 
