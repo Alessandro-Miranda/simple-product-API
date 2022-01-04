@@ -1,12 +1,12 @@
 <?php
 
 use App\Model\DownloadProducts;
+use App\Utils\LoadEnv;
 use Dotenv\Dotenv;
 
 require 'vendor/autoload.php';
 
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
+LoadEnv::load(__DIR__);
 
 $download = new DownloadProducts();
 

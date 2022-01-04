@@ -2,10 +2,9 @@
 require 'vendor/autoload.php';
 
 use App\Controller\ProductController;
-use Dotenv\Dotenv;
+use App\Utils\LoadEnv;
 
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
+LoadEnv::load(__DIR__);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
