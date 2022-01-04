@@ -205,7 +205,7 @@ class DownloadProducts implements IDownloadProducts
      */
     private function sleep()
     {
-        if($this->counter === 500)
+        if($this->counter === 1000)
         {
             $this->counter=0;
             sleep(20);
