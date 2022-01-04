@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Utils\ErrorMessages;
 use App\Utils\RegisterLog;
+use Error;
 use IDatabaseRepository;
 use PDO;
 use PDOException;
@@ -84,6 +85,51 @@ class Database implements IDatabaseRepository
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
+    }
+
+    /**
+     * Atualiza os produtos já existentes e, caso não exista, insere na base
+     *
+     * @param array $products
+     * @return void
+     */
+    public function updateProducts($products): void
+    {
+        try
+        {
+            $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->PDO->beginTransaction();
+
+            foreach($products as $value)
+            {
+                $whereFilter = "productID={$value["productId"]}";
+                $columnAndValue = array();
+    
+                array_walk(
+                    $value,
+                    function($item, $key) use (&$columnAndValue) {
+                        array_push($columnAndValue, "{$key}='{$item}'");
+                    }
+                );
+                
+                $setColumnValues = implode(",", $columnAndValue);
+                $this->PDO->exec("UPDATE produtos SET {$setColumnValues} WHERE {$whereFilter}");
+            }
+
+            if($this->PDO->commit())
+            {
+                RegisterLog::RegisterLog('Info', 'Atualização dos produtos concluída com sucesso', 'update-info.log');
+            }
+            else
+            {
+                throw new Error("Erro ao commitar a transação");
+            }
+        }
+        catch(PDOException $err)
+        {
+            $errorMessage = $err->getMessage() . " On product {$value["productId"]}";
+            RegisterLog::RegisterLog('error', $errorMessage, 'update-info.log');
+        }
     }
 
     /**
