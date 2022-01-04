@@ -150,6 +150,12 @@ Para realizar o download das informações de todos os produtos, é necessário 
 O Script será iniciado em ciclos de 500 requisições para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto porém, pode ser adaptado para a necessidade do projeto e com base na limitação de requisições da API a ser utilizada.
 Alguns produtos podem retornar sem a informação de tag de desconto, preço e valor com desconto
 
+### Atualização dos produtos
+
+A atualização dos produtos funciona de forma similiar ao download, bastando iniciar via CLI ou navegador a execução do arquivo (initUpdate.php). Via CLI basta executar o comando:
+
+>php initUpdate.php
+
 ## Tecnologias e Ferramentas
 
 - [PHP](https://www.php.net/)
