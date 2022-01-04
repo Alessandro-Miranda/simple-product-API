@@ -1,13 +1,13 @@
-#environment
+# environment
 .env
 .env.local
 
 # Composer
 vendor/
 
-#log files
+# log files
 *.log
 
-#sku and ean files
-eans.txt
-skus.txt
+# sku, ean and others files used to make a requests
+*.txt
+*.txt
