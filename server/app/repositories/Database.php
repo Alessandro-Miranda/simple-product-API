@@ -109,7 +109,7 @@ class Database implements IDatabaseRepository
         $valuesToSelectImploded = implode(",", $valuesFormatedToSelect);
         $columnsImploded = implode(",", $columns);
 
-        $stmt = $this->PDO->prepare("INSERT INTO produtos({$columnsImploded}) SELECT * FROM (SELECT {$valuesToSelectImploded}) as tmp WHERE NOT EXISTS (SELECT productID FROM produtos WHERE productID={$productID})");
+        $stmt = $this->PDO->prepare("INSERT INTO produtos({$columnsImploded}) SELECT * FROM (SELECT {$valuesToSelectImploded}) as tmp WHERE NOT EXISTS (SELECT productID FROM produtos WHERE productID={$productID}) LIMIT 1");
 
         $stmt->execute();
         
