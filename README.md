@@ -1,4 +1,4 @@
-# Página de produtos + Servidor de lista de produtos
+# Listagem de produtos + Página de produtos 
 
 ### Status do projeto
 
@@ -10,14 +10,14 @@ Devido à necessidade de criação de páginas com listagem de produtos, para ca
 
 ## Objetivo
 
-O principal objetivo do projeto é criar uma base de dados com as informações de produtos existentes, fazendo atualização contínua das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que, quando necessário, conseguir consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX a cada projeto diferente.
+O principal objetivo do projeto é criar uma base de dados com as informações de produtos existentes, fazendo atualização, quando necessário, das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que seja possível consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX a cada projeto diferente.
 
 ## Entregáveis
 
 - Base de dados de produtos; :white_check_mark:
 - Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :white_check_mark:
-- Aplicação responsável por servir as informações dos produtos
-- Layout sugerido da página de produtos; :construction:
+- Aplicação responsável por servir as informações dos produtos; :white_check_mark:
+- Layout de exemplo :construction:
 
 ## Features
 
