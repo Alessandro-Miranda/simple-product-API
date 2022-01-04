@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Interfaces\IProductsBase;
 use App\Utils\RegisterLog;
 use Error;
-use IProductsBase;
 use PDO;
 use PDOException;
 
@@ -31,31 +31,25 @@ class ProductsBase extends Database implements IProductsBase
 
             foreach($values as $actualItem)
             {
-                $lenght = count($actualItem);
-                $counter = 0;
-                $columns = "";
-                $columnValues = "";
+                $columns = array();
+                $columnValues = array();
 
                 // Separa as chaves do array como coluna da tabela e os valores para criar a query de insert
                 array_walk(
                     $actualItem,
-                    function($item, $key) use (&$columns, &$columnValues, &$counter, &$lenght) {
-                    
-                        if($counter >= $lenght - 1)
-                        {
-                            $columns .= $key;
-                            $columnValues .= gettype($item) === "string" ? "'{$item}'" : $item;
-                        }
-                        else
-                        {
-                            $columns .= "{$key},";
-                            $columnValues .= gettype($item) === "string" ? "'{$item}'," : "{$item},";
-                        }
+                    function($item, $key) use (&$columns, &$columnValues) {
 
-                        $counter++;
+                        $itemFormated = gettype($item) === "string" ? "'{$item}'" : $item;
+
+                        array_push($columnValues, $itemFormated);
+                        array_push($columns, $key);
                     }
                 );
 
+                $teste1 = implode(",", $columns);
+                $teste2 = implode(",", $columnValues);
+                echo "INSERT INTO {$tableName} ({$teste1}) VALUES ({$teste2})";
+                exit();
                 $stmt = "INSERT INTO {$tableName} ({$columns}) VALUES ({$columnValues})";
                 
                 $this->PDO->exec($stmt);
