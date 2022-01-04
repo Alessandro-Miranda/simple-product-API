@@ -5,11 +5,12 @@ set_time_limit(3600);
 
 use App\Repositories\ProductsBase;
 use App\Utils\RegisterLog;
+use IDownloadProducts;
 
 /**
 * Inicia o download dos produtos e salva no banco
 */
-class DownloadProducts
+class DownloadProducts implements IDownloadProducts
 {
     private $curl;
     private $skus;
@@ -32,11 +33,11 @@ class DownloadProducts
     }
 
     /**
-     * Obtém as informações: 
+     * Obtém as informações sobre preço (De/por) dos produtos com base no sku
      *
-     * @return this
+     * @return self
      */
-    public function getPriceInformations()
+    public function getPriceInformations(): self
     {   
         foreach($this->skus as $value)
         {
@@ -68,11 +69,11 @@ class DownloadProducts
     }
 
     /**
-     * Obtém as informações: url da imagem. url da página de destino, categorias, id e nome do produto com base no EAN
+     * Obtém a url da imagem, url da página de destino, categorias, id e nome do produto com base no EAN
      *
-     * @return this
+     * @return self
      */
-    public function getProductInformations()
+    public function getProductInformations(): self
     {
         foreach($this->eans as $value)
         {
@@ -110,7 +111,12 @@ class DownloadProducts
         return $this;
     }
 
-    public function saveProducts()
+    /**
+     * Invoca a inserção dos produtos no banco de dados
+     *
+     * @return void
+     */
+    public function saveProducts(): void
     {
         $db = new ProductsBase();
 
@@ -126,7 +132,7 @@ class DownloadProducts
      * @param string $internalLoopType
      * @return array
      */
-    private function setProductInformations($keys, $json, $internalArray, $internalLoopType = "ProductInfos")
+    private function setProductInformations($keys, $json, $internalArray, $internalLoopType = "ProductInfos"): array
     {
         $productInformation = array();
         
@@ -211,7 +217,7 @@ class DownloadProducts
     }
 
     /**
-     * Verifica se a houve algum erro na requisição e, caso tenha, registra o log e finaliza a execução
+     * Verifica se houve algum erro na requisição e, caso tenha, registra o log e finaliza a execução
      *
      * @param string $message
      * @param Error  $error
