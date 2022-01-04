@@ -147,7 +147,7 @@ Para realizar o download das informações de todos os produtos, é necessário 
 
 > php initDownload.php
 
-O Script será iniciado em ciclos de 500 requisições e pausa de 20 segundos para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto.
+O Script será iniciado em ciclos de 1000 requisições e pausa de 20 segundos para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto.
 _Alguns produtos podem retornar sem a informação de tag de desconto, valor e valor com desconto._
 
 ### Atualização dos produtos
