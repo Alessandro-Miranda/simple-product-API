@@ -9,11 +9,10 @@ interface ICacheRepository
      *
      * @throws Exception
      * @param string      $fileName
-     * @param bool|null   $isReturnable
      * @param string|null $folderPath
      * @return mixed
      */
-    public function readCacheFile(string $filename, bool $isReturnable, ?string $folder): mixed;
+    public function readCacheFile(string $filename, ?string $folder): mixed;
 
     /**
      * Salva o arquivo na pasta especificada ou, por padrão, na pasta chamada cache
