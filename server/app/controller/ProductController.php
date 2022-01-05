@@ -5,6 +5,7 @@ use App\Model\ProductGateway;
 use App\Repositories\Cache;
 use App\Utils\ErrorMessages;
 use App\Utils\RegisterLog;
+use Exception;
 
 class ProductController
 {
@@ -26,13 +27,27 @@ class ProductController
 
         if($cache->hasValidCache('products.cache'))
         {
-            $products = $cache->readCacheFile('products.cache');
-            $this->sendResponse($products);
+            try
+            {
+                $products = $cache->readCacheFile('products.cache');
+                $this->sendResponse($products);
+            }
+            catch(Exception $err)
+            {
+                RegisterLog::RegisterLog('Error', $err->getMessage(), 'cache-infos.log');
+            }
         }
         else
         {
-            $cache->save($products, "products.cache");
-            $this->sendResponse($products);
+            try
+            {
+                $cache->save($products, "products.cache");
+                $this->sendResponse($products);
+            }
+            catch(Exception $err)
+            {
+                RegisterLog::RegisterLog('Error', $err->getMessage(), 'cache-infos.log');
+            }
         }
     }
 
