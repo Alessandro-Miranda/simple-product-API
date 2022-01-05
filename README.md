@@ -6,11 +6,11 @@
 
 ## Descrição
 
-Devido à necessidade de criação de páginas e landing pages com listagem de produtos, para campanhas e demais necessidades, teve-se a ideia de criar este projeto com o intuito de ter uma base contendo as principais informações dos produtos para exibição ao usuário e, dessa forma, agilizar o processo de criação de landing pages.
+API simples com intuíto de realizar a listagem de informações básicas de produtos tal como também a informação de paginação e total de resultados por filtro.
 
 ## Objetivo
 
-O principal objetivo do projeto é criar uma base de dados com as informações de produtos existentes, fazendo atualização, quando necessário, das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que seja possível consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX (plataforma utilizada neste projeto) a cada projeto diferente.
+O principal objetivo do projeto é criar uma pequena base de dados com as informações de produtos, fazendo atualização, quando necessário, das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que seja possível consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX (plataforma utilizada neste projeto) a cada projeto diferente.
 
 ## Entregáveis
 
