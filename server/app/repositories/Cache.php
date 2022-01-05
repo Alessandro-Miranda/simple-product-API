@@ -59,7 +59,7 @@ class Cache implements ICacheRepository
 
         if($state === false)
         {
-            RegisterLog::RegisterLog('Error', 'Failed to save cache file', 'cache-infos.log');
+            throw new Exception("An Error has occured saving the cache file");
         }
     }
 
