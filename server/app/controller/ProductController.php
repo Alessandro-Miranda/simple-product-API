@@ -19,7 +19,12 @@ class ProductController
         $this->model = new ProductGateway();
     }
 
-    public function getAllProducts()
+    /**
+     * Faz a busca de todos os produtos
+     *
+     * @return void
+     */
+    public function getAllProducts(): void
     {
         $products = $this->model->findAll($this->limit, $this->page);
         
@@ -29,12 +34,13 @@ class ProductController
         {
             try
             {
-                $products = $cache->readCacheFile('products.cache');
-                $this->sendResponse($products);
+                $cachedProducts = $cache->readCacheFile('products.cache');
+                $this->sendResponse($cachedProducts);
             }
             catch(Exception $err)
             {
                 RegisterLog::RegisterLog('Error', $err->getMessage(), 'cache-infos.log');
+                $this->sendResponse($products);
             }
         }
         else
@@ -51,7 +57,13 @@ class ProductController
         }
     }
 
-    public function filterProducts($queryString)
+    /**
+     * Filtra os produtos com base na query string passada
+     *
+     * @param string $queryString
+     * @return void
+     */
+    public function filterProducts(string $queryString): void
     {
         $this->explodeQuery($queryString);
         $this->pageExists();
@@ -64,7 +76,13 @@ class ProductController
         );
     }
 
-    public function explodeQuery($query)
+    /**
+     * Configura um array contendo os filtros a serem aplicados nas consultas
+     *
+     * @param string $query
+     * @return void
+     */
+    public function explodeQuery(string $query): void
     {
         parse_str($query, $exploadedQuery);
         $paramsAllowed = array("productName", "discountTag", "productCategories", "productID", "sku");
@@ -90,7 +108,12 @@ class ProductController
         }
     }
 
-    public function paginationInfos()
+    /**
+     * Obtém as informações sobre a paginação
+     *
+     * @return array
+     */
+    public function paginationInfos(): array
     {
         return array(
             "totalProducts" => $this->model->getNumberOfRows($this->filters),
@@ -100,7 +123,12 @@ class ProductController
         );
     }
 
-    public function pageExists()
+    /**
+     * Verifica se a página solicitada existe
+     *
+     * @return void
+     */
+    public function pageExists(): void
     {
         if($this->model->totalPages($this->limit, $this->filters) < $this->page)
         {
@@ -109,7 +137,13 @@ class ProductController
         }
     }
 
-    public function sendResponse($data)
+    /**
+     * Retorna a resposta da solicitação
+     *
+     * @param mixed $data
+     * @return void
+     */
+    public function sendResponse(mixed $data): void
     {
         $data = array(
             "data" => $data,
