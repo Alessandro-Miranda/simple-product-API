@@ -39,6 +39,8 @@ class DownloadProducts implements IDownloadProducts
      */
     public function getPriceInformations(): self
     {   
+        $keys = array(0 => "productId");
+        
         foreach($this->skus as $value)
         {
             $this->prepareRequest("https://{$this->accountName}.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/{$value}");
@@ -49,7 +51,6 @@ class DownloadProducts implements IDownloadProducts
             $this->checkError("Error downloading product price", $error);
 
             $pricesDecoded = json_decode($prices, true);
-            $keys = array(0 => "productId");
 
             if($pricesDecoded === "ProductId not found" || $pricesDecoded === "SKU not found.")
             {
@@ -75,15 +76,16 @@ class DownloadProducts implements IDownloadProducts
      */
     public function getProductInformations(): self
     {
+        $keys = array(
+            0 => "imageUrl",
+            1 => "detailUrl",
+            2 => "productCategories",
+            3 => "productId",
+            4 => "productName"
+        );
+        
         foreach($this->eans as $value)
-        {
-            $keys = array(
-                0 => "imageUrl",
-                1 => "detailUrl",
-                2 => "productCategories",
-                3 => "productId",
-                4 => "productName"
-            );
+        {   
             // Obtém a url da imagem e da página de destino e a lista de categorias
             $this->prepareRequest("https://{$this->accountName}.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/{$value}");
     
