@@ -67,12 +67,11 @@ class ProductController
     public function explodeQuery($query)
     {
         parse_str($query, $exploadedQuery);
-        
+        $paramsAllowed = array("productName", "discountTag", "productCategories", "productID", "sku");
         foreach($exploadedQuery as $key => $value)
         {
             if($key === 'limit')
             {
-                
                 $this->limit = intval($value) > 100 ? 100 : intval($value);
                 continue;
             }
@@ -82,13 +81,7 @@ class ProductController
                 continue;
             }
             
-            if(
-                $key !== 'productName' &&
-                $key !== 'discountTag' &&
-                $key !== 'productCategories' &&
-                $key !== 'productID' &&
-                $key !== 'sku'
-            )
+            if(!in_array($key, $paramsAllowed))
             {
                 continue;
             }
