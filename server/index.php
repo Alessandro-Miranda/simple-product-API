@@ -22,15 +22,14 @@ if($hasProductPath === false)
     exit();
 }
 
-$queryString = $_SERVER['QUERY_STRING'];
-
 $productController = new ProductController();
 
-if(empty($queryString))
+if(isset($_SERVER['QUERY_STRING']))
 {
-    $productController->getAllProducts();
+    $queryString = $_SERVER['QUERY_STRING'];
+    $productController->filterProducts($queryString);
 }
 else
 {
-    $productController->filterProducts($queryString);
+    $productController->getAllProducts();
 }
