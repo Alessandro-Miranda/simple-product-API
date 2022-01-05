@@ -124,7 +124,6 @@ class Database implements IDatabaseRepository
      */
     public function updateProducts(array $products): void
     {
-
         foreach($products as $key => $value)
         {
             try
