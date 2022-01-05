@@ -35,7 +35,7 @@ O principal objetivo do projeto é criar uma pequena base de dados com as inform
 		- [x] Filtro por nome do produto
 		- [x] Filtro por tag de desconto
 - **Front**
-    - [ ] Criação da interface de exemplo
+    - [ ] Criação da interface de exemplo Mobile e Desktop
 
 ## Pré-requisitos
 
