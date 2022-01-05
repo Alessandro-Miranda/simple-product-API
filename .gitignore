@@ -11,3 +11,6 @@ vendor/
 # sku, ean and others files used to make a requests
 *.txt
 *.txt
+
+# cache files
+cache
