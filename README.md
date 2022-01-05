@@ -1,5 +1,7 @@
 # Listagem de produtos + Página de produtos
 
+- [English version](https://github.com/Alessandro-Miranda/products-listing/blob/main/README.en.md)
+
 ### Status do projeto
 
 *Em desenvolvimento* :construction:
