@@ -11,7 +11,7 @@ class Cache implements ICacheRepository
     private $file;
 
     /**
-     * Lê o arquivo em cache e se passado o parâmetro $return, será retornado a informação; senão, armazena na propriedade $file para ser utilizada por outros métodos da classe
+     * Lê o arquivo em cache transformando um array associativo e, se passado o parâmetro $return, será retornado a informação; senão, armazena na propriedade $file para ser utilizada por outros métodos da classe e retorna true para indicar sucesso
      *
      * @throws Exception
      * @param string      $fileName
@@ -26,16 +26,9 @@ class Cache implements ICacheRepository
             throw new Exception("The cache file doesn't exists");
         }
 
-        $file = file_get_contents($this->getFilePath($filename, $folder));
+        $file = json_decode(file_get_contents($this->getFilePath($filename, $folder)), JSON_OBJECT_AS_ARRAY);
 
-        if($isReturnable)
-        {
-            return $file;
-        }
-        else
-        {
-            $this->file = $file;   
-        }
+        return $file['content'];
     }
 
     /**
@@ -52,7 +45,17 @@ class Cache implements ICacheRepository
     {
         $path = $this->getFilePath($filename, $folder);
 
-        $state = file_put_contents($path, $informationsToSave);
+        if(!is_dir($folder))
+        {
+            mkdir($folder);
+        }
+
+        $infos = json_encode(array(
+            'expires' => time() + 60,
+            'content' => $informationsToSave
+        ), JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES);
+
+        $state = file_put_contents($path, $infos);
 
         if($state === false)
         {
@@ -71,11 +74,11 @@ class Cache implements ICacheRepository
     {
         $isValidCache = false;
 
-        if(file_exists($this->getFilePath($filename, $folder)) && is_readable($this->getFilePath($filename, $folder)))
+        if(file_exists($this->getFilePath($filename, $folder)))
         {
-            $cache = file_get_contents($filename);
-
-            if($cache['expires'] < time())
+            $cache = json_decode(file_get_contents($this->getFilePath($filename, $folder), true), JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT);
+            
+            if($cache->{'expires'} < time())
             {
                 $isValidCache = true;
             }
@@ -93,18 +96,8 @@ class Cache implements ICacheRepository
         return $isValidCache;
     }
 
-    /**
-     * Converte o arquivo de cache para o formato json
-     *
-     * @return void
-     */
-    public function toJson(): string | false
-    {
-        return json_encode($this->file, JSON_UNESCAPED_SLASHES);
-    }
-
     private function getFilePath(string $filename, string $folder)
     {
-        return $folder . DIRECTORY_SEPARATOR . $filename;
+        return realpath('./') . "\\" . $folder . DIRECTORY_SEPARATOR . $filename;
     }
 }
