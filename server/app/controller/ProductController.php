@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Model\ProductGateway;
+use App\Repositories\Cache;
 use App\Utils\ErrorMessages;
 use App\Utils\RegisterLog;
 
@@ -19,7 +20,20 @@ class ProductController
 
     public function getAllProducts()
     {
-        $this->sendResponse($this->model->findAll($this->limit, $this->page));
+        $products = $this->model->findAll($this->limit, $this->page);
+        
+        $cache = new Cache();
+
+        if($cache->hasValidCache('products.cache'))
+        {
+            $products = $cache->readCacheFile('products.cache');
+            $this->sendResponse($products);
+        }
+        else
+        {
+            $cache->save($products, "products.cache");
+            $this->sendResponse($products);
+        }
     }
 
     public function filterProducts($queryString)
