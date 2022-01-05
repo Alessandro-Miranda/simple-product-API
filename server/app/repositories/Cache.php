@@ -95,6 +95,6 @@ class Cache implements ICacheRepository
 
     private function getFilePath(string $filename, string $folder)
     {
-        return realpath('./') . "\\" . $folder . DIRECTORY_SEPARATOR . $filename;
+        return realpath('./') . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $filename;
     }
 }
