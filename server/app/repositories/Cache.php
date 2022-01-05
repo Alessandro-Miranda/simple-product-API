@@ -8,18 +8,15 @@ use Exception;
 
 class Cache implements ICacheRepository
 {
-    private $file;
-
     /**
-     * Lê o arquivo em cache transformando um array associativo e, se passado o parâmetro $return, será retornado a informação; senão, armazena na propriedade $file para ser utilizada por outros métodos da classe e retorna true para indicar sucesso
+     * Lê o arquivo em cache transformando um array associativo e retorna a informação
      *
      * @throws Exception
      * @param string      $fileName
-     * @param bool|null   $isReturnable
      * @param string|null $folderPath
      * @return mixed
      */
-    public function readCacheFile(string $filename, ?bool $isReturnable = false, ?string $folder = "cache"): mixed
+    public function readCacheFile(string $filename, ?string $folder = "cache"): mixed
     {
         if(!file_exists($folder . DIRECTORY_SEPARATOR . $filename))
         {
