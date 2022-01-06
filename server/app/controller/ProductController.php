@@ -85,7 +85,8 @@ class ProductController
     public function explodeQuery(string $query): void
     {
         parse_str($query, $exploadedQuery);
-        $paramsAllowed = array("productName", "discountTag", "productCategories", "productID", "sku");
+        $paramsAllowed = array("productName", "discountTag", "productCategories", "productID", "sku", "bestPrice");
+        
         foreach($exploadedQuery as $key => $value)
         {
             if($key === 'limit')
