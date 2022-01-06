@@ -45,7 +45,7 @@ class LoadEnv
     {
         foreach($this->envValues as $value)
         {
-            if(preg_match('/\s|#^\d/' , $value))
+            if(preg_match('/\s|#(?:\s|\w)\w+/' , $value))
             {
                 continue;
             }
