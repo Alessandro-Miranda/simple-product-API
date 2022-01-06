@@ -94,7 +94,7 @@ productCategories    | string				| Lista de categorias a que o produto pertence
 
 ## Uso
 
-Para listar todos os produtos ou filtrar com base na queryStrig passada, pode-se utilizar a URL _**/products**_.
+Para listar ou filtrar os produtos, pode-se utilizar a URL _**/products**_.
 
 _obs: Por padrão o limite de produtos retornados é 10 e o máximo é 100 e a página atual sempre a primeira_
 
