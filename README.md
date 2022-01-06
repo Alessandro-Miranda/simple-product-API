@@ -74,6 +74,7 @@ Com o servidor iniciado já será possível acessar os produtos disponíveis na 
 - *productCategories* - As categorias de produtos (Aceita mais de uma categoria separada pelo sinal de adição(+))
 - *productID* - Id do produto buscado
 - *sku* - Sku do produto buscado
+- *bestPrice* - Faixa de preço do produto (Aceita dois valores separados pelo sinal de adição(+)). _Obs.: O valor não deve possuir vírgulas ou pontos. Ex.: R$ 30,25 deve ser passado como 3025_
 
 ### Produtos
 
@@ -107,6 +108,7 @@ Alguns exemplos de filtro e busca de produtos:
 - _**/products?productCategories=Emagrecimento+beleza+saude&limit=20**_ : Limita o resultado de itens por página;
 - _**/products?productCategories=Emagrecimento+beleza+saude&page=2**_ : Solicita a página 2 da listagem de produtos
 - _**/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2**_ : União de diversos filtros
+- _**/products?bestPrice=3000+4000**_ : Faz a busca pela faixa de preço do produto
 
 _Os parâmetros limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre associado a eles o valor pdrão de 10 e 1, respectivamente._
 

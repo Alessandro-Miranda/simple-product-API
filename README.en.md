@@ -74,18 +74,7 @@ With the server started it'll now be possible to access the available products v
 - *productCategories* - Product categories (Allowed more than one category separated by the plus (+) signal)
 - *productID* - Product ID
 - *sku* - Product SKU
-
-Some filters and search examples:
-
-- _**/products**_ : Return all products in the first page with default limit of 10 products
-- _**/products?productName=some%20%product**_ : Return all products with name like the informade
-- _**/products?discountTag=40**_ : Returns products with the requested discount tag following the following logic (range between discount-10 and discount)
-- _**/products?productCategories=Emagrecimento+beleza+saude**_ = Return all products that belong to the informed category
-- _**/products?productCategories=Emagrecimento+beleza+saude&limit=20**_ : Limit the result of items per page
-- _**/products?productCategories=Emagrecimento+beleza+saude&page=2**_ : Get the page 2
-- _**/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2**_ : Filters uniom
-
-_The limit and page params can be sent together another filter allowed and, when omitted, they assume the default values of 10 e 1, respectively_
+- *bestPrice* - Price range (Allowed more than one price separated by the plus signal(+)). _Obs.: The value must not have commas or periods. PS.: $ 30,25 must be passed as 3025_
 
 ### Products
 
@@ -109,6 +98,19 @@ productCategories    | string				| Categories list
 To list or filter the products just use the _**/products**_ passing all necessary queryStrings.
 
 _PS.: The product limit default per page is 10 and the max is 100 and also the current page is always the first_
+
+Some filters and search examples:
+
+- _**/products**_ : Return all products in the first page with default limit of 10 products
+- _**/products?productName=some%20%product**_ : Return all products with name like the informade
+- _**/products?discountTag=40**_ : Returns products with the requested discount tag following the following logic (range between discount-10 and discount)
+- _**/products?productCategories=Emagrecimento+beleza+saude**_ = Return all products that belong to the informed category
+- _**/products?productCategories=Emagrecimento+beleza+saude&limit=20**_ : Limit the result of items per page
+- _**/products?productCategories=Emagrecimento+beleza+saude&page=2**_ : Get the page 2
+- _**/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2**_ : Filters uniom
+- _**/products?bestPrice=3000+4000**_ : Filter by the price range
+
+_The limit and page params can be sent together another filter allowed and, when omitted, they assume the default values of 10 e 1, respectively_
 
 ### Response example
 
