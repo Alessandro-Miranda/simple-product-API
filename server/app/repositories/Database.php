@@ -217,11 +217,14 @@ class Database implements IDatabaseRepository
 
         foreach($filters as $key => $value)
         {
-            if($key === 'discountTag')
+            if($key === 'discountTag' || $key === 'bestPrice')
             {
+                $value1 = ($key === 'discountTag') ? intval($value) - 10 : explode(" ", $value)[0];
+                $value2 = ($key === 'discountTag') ? intval($value) : explode(" ", $value)[1];
+
                 array_push(
                     $whereFilter,
-                    "{$key} BETWEEN " . intval($value) - 10 . " AND " . intval($value)
+                    "{$key} BETWEEN " . $value1 . " AND " . $value2
                 );
                 continue;
             }
@@ -237,7 +240,7 @@ class Database implements IDatabaseRepository
                 $this->createWhereRegex($key, $value)
             );
         }
-
+        
         return implode(" AND ", $whereFilter);
     }
 
