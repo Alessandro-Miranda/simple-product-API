@@ -1,6 +1,6 @@
 # Listagem de produtos + Página de produtos
 
-- [English version](https://github.com/Alessandro-Miranda/products-listing/blob/main/README.en.md)
+- [English](https://github.com/Alessandro-Miranda/products-listing/blob/main/README.en.md)
 
 ### Status do projeto
 
@@ -17,9 +17,9 @@ O principal objetivo do projeto é criar uma pequena base de dados com as inform
 ## Entregáveis
 
 - Base de dados de produtos; :white_check_mark:
-- Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs existentes; :white_check_mark:
+- Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs e EANS; :white_check_mark:
 - Aplicação responsável por servir as informações dos produtos; :white_check_mark:
-- Layout de exemplo :construction:
+- Layout de exemplo (Mobile and Web) :construction:
 
 ## Features
 
@@ -47,17 +47,23 @@ Tenha certeza de ter instalado em sua máquina o [Composer](https://getcomposer.
 
 Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, então, instale as dependências utilizando o composer
 
->cd server && php composer.phar install
+```bash
+cd server && composer install
+
+ou
+
+cd server && php composer.phar install
+```
 
 Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código. Para baixar os produtos e atualizá-los, será necessário atualizar o código existente conforme a necessidade da plataforma utilizada e os endpoints necessários. O projeto atual foi feito utilizando a plataforma VTEX, portanto, é necessário ter os arquivos *ean.txt* e *sku.txt* para obter as informações necessárias dos produtos.
 
-### Servidor de desenvolvimento
+### Desenvolvimento
 
-Para dar início ao servidor de desenvolvimento basta seguir os passos do servidor utilizado ou, caso utilize o servidor embutido do PHP, basta rodar, no terminal, o comando abaixo para que seja iniciado o servidor.
+Inicie o servidor PHP seguindo os passos do servidor utilizado ou, caso utilize o servidor embutido do PHP, basta rodar, no terminal, o comando abaixo para que seja iniciado o servidor.
 
 >composer server
 
-Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da rota */products*. As informações possíveis de serem passadas para a rota via Query String são:
+Com o servidor iniciado já será possível acessar os produtos disponíveis na base através da rota */products*. Os parâmetros permitidos pela rota são:
 
 - *limit* - Limite de itens retornados em cada página
 - *page* - página de exibição de produtos
@@ -74,8 +80,8 @@ Todos os produtos são identificados pelo productID e, também, pelo seu sku. To
 Campo                | Tipo					| Descrição
 -------------------- | ---------------------|-------------------------
 productID            | integer				| Id único do produto
-sku                  | integer				| Sku do produto - identificador único junto (geralmente é o mesmo valor que o productID)
-sellerID             | string 				| contendo o identificador do seller do produto (o valor padrão do seller é 1)
+sku                  | integer				| Sku do produto - identificador único junto com o productID (geralmente é o mesmo valor que o productID)
+sellerID             | string 				| Identificador do seller do produto (o valor padrão do seller é 1)
 imageUrl             | string				| Url da imagem do produto
 detailUrl            | string				| Url da página do produto
 productName          | string				| Nome do produto
@@ -86,25 +92,25 @@ productCategories    | string				| Lista de categorias a que o produto pertence
 
 ## Uso
 
-Para listar todos os produtos ou filtrar com base na queryStrig passada, pode-se utilizar a URL _**/products**_, substituindo os termos entre chaves pela URL onde a aplicação está rodando.
+Para listar todos os produtos ou filtrar com base na queryStrig passada, pode-se utilizar a URL _**/products**_.
 
 _obs: Por padrão o limite de produtos retornados é 10 e o máximo é 100 e a página atual sempre a primeira_
 
-Para Realizar os filtros basta utilizar as querys no seguinte formato:
+Alguns exemplos de filtro e busca de produtos:
 
 - _**/products**_ : Retorna todos os produtos, retornando a primeira página limitando em 10 produtos
 - _**/products?productName=some%20%product**_ : Retorna os produtos que contenham o nome passado
-- _**/products?discountTag=40**_ : Retorna os produtos que estejam em uma faixa de desconto menor ou igual a passada na query
+- _**/products?discountTag=40**_ : Retorna os produtos com a tag de desconto solicitada obedecendo a seguinte lógica (faixa entre desconto-10 e desconto)
 - _**/products?productCategories=Emagrecimento+beleza+saude**_ = Retorna os produtos que pertençam à categoria passada
-- _**/products?productCategories=Emagrecimento+beleza+saude&limit=20**_ : Limita o resultado da busca, com base no valor passado, de itens por página; respeitando o máximo de 100 itens por página.
+- _**/products?productCategories=Emagrecimento+beleza+saude&limit=20**_ : Limita o resultado de itens por página;
 - _**/products?productCategories=Emagrecimento+beleza+saude&page=2**_ : Solicita a página 2 da listagem de produtos
-- _**/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2**_ : Filtra todos os produtos com valor de desconto menor ou igual ao passado e que pertençam à categoria, limitando a quantidade de retorno e página solicitada
+- _**/products?productCategories=Emagrecimento&discountTag=30&limit=15&page=2**_ : União de diversos filtros
 
-_O parâmetro limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre associado a eles o valor 10 e 1, respectivamente._
+_Os parâmetros limit e page pode ser enviado em conjunto com qualquer um dos outros filtros aceitos e, quando omitidos, será sempre associado a eles o valor pdrão de 10 e 1, respectivamente._
 
-### Exemplo de retorno
+### Exemplo de resposta
 
-Ao solicitar a url - _**/products?productCategories=Emagrecimento+beleza+saude&limit=2**_, o retorno será como o exemplo a seguir
+Ao solicitar a url _**/products?productCategories=Emagrecimento+beleza+saude&limit=2**_, o retorno será como o exemplo a seguir
 
 ```json
 {
@@ -145,12 +151,13 @@ Ao solicitar a url - _**/products?productCategories=Emagrecimento+beleza+saude&l
 
 ### Download inicial das informações dos produtos
 
-Para realizar o download das informações de todos os produtos, é necessário executar o arquivo de início (initDownload.php) através do navegador ou via CLI, e iniciar a execução do arquivo. Utilizando a CLI do PHP basta executar o comando:
+Para realizar o download das informações de todos os produtos, é necessário executar o arquivo _initDownload.php_ através do navegador ou via CLI. Utilizando a CLI do PHP basta executar o comando:
 
 > php initDownload.php
 
 O Script será iniciado em ciclos de 1000 requisições e pausa de 20 segundos para não ultrapassar o limite de requisições por minuto das APIS utilizadas no desenvolvimento do projeto.
-_Alguns produtos podem retornar sem a informação de tag de desconto, valor e valor com desconto._
+
+_Alguns produtos podem retornar sem as informações de tag de desconto, valor e valor com desconto._
 
 ### Atualização dos produtos
 
@@ -165,10 +172,10 @@ A atualização dos produtos funciona de forma similiar ao download, bastando in
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
 
-## Autores
+## Autor
 
 - [Alessandro Miranda](https://github.com/Alessandro-Miranda) - _Ideia inicial e desenvolvimento_
 
 ## Licença
 
-Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE.md) para detalhes.
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE](https://github.com/Alessandro-Miranda/pagina-produtos/blob/main/LICENSE) para detalhes.
