@@ -74,7 +74,7 @@ With the server started it'll now be possible to access the available products v
 - *productCategories* - Product categories (Allowed more than one category separated by the plus (+) signal)
 - *productID* - Product ID
 - *sku* - Product SKU
-- *bestPrice* - Price range (Allowed more than one price separated by the plus signal(+)). _Obs.: The value must not have commas or periods. PS.: $ 30,25 must be passed as 3025_
+- *bestPrice* - Price range (Allowed two values separated by the plus signal(+)). _Obs.: The value must not have commas or periods. PS.: $ 30,25 must be passed as 3025_
 
 ### Products
 
