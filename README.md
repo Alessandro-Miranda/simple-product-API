@@ -10,6 +10,8 @@
 
 API simples com intuíto de realizar a listagem de informações básicas de produtos tal como também a informação de paginação e total de resultados por filtro.
 
+Fique a vontade para contribuir com este projeto. :smile:
+
 ## Objetivo
 
 O principal objetivo do projeto é criar uma pequena base de dados com as informações de produtos, fazendo atualização, quando necessário, das informações (preço de/por, url da imagem, url detalhada do produto, categoria etc.) para que seja possível consumir as informações sem a necessidade de inserção manual das informações por quem estiver criando o front ou, até mesmo, realizar a codificação de requisições para as APIs da VTEX (plataforma utilizada neste projeto) a cada projeto diferente.
