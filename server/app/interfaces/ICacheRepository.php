@@ -5,7 +5,7 @@ namespace App\Interfaces;
 interface ICacheRepository
 {
     /**
-     * Lê o arquivo em cache e se passado o parâmetro $return, será retornado a informação; senão, armazena na propriedade $file para ser utilizada por outros métodos da classe
+     * Lê o arquivo em cache transformando um array associativo e retorna a informação
      *
      * @throws Exception
      * @param string      $fileName
