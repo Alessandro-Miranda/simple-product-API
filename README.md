@@ -171,11 +171,21 @@ A atualização dos produtos funciona de forma similiar ao download, bastando in
 
 ## Tecnologias e Ferramentas
 
+### Server
+
 - [PHP](https://www.php.net/)
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
+
+### Web
+
 - [Next.js](https://nextjs.org/)
+- [styled-components](https://styled-components.com/)
+
+### Mobile
+
+- [React Native](https://reactnative.dev/)
 - [styled-components](https://styled-components.com/)
 
 ## Autor

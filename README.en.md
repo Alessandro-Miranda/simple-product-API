@@ -171,11 +171,21 @@ The update process is like the download process. You just need start the file _i
 
 ## Technologies and tools
 
+### Server
+
 - [PHP](https://www.php.net/)
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
+
+### Web
+
 - [Next.js](https://nextjs.org/)
+- [styled-components](https://styled-components.com/)
+
+### Mobile
+
+- [React Native](https://reactnative.dev/)
 - [styled-components](https://styled-components.com/)
 
 ## Author
