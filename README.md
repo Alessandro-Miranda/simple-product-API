@@ -175,6 +175,8 @@ A atualização dos produtos funciona de forma similiar ao download, bastando in
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
+- [Next.js](https://nextjs.org/)
+- [styled-components](https://styled-components.com/)
 
 ## Autor
 
