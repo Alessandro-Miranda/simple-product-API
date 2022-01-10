@@ -175,6 +175,8 @@ The update process is like the download process. You just need start the file _i
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
+- [Next.js](https://nextjs.org/)
+- [styled-components](https://styled-components.com/)
 
 ## Author
 
