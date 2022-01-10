@@ -8,7 +8,7 @@
 
 ## Descrição
 
-API simples com intuíto de realizar a listagem de informações básicas de produtos tal como também a informação de paginação e total de resultados por filtro.
+API simples com intuíto de realizar a listagem de informações básicas de produtos tal como também a informação de paginação e total de resultados por filtro. Projeto com intenção de uso diário e, também, para estudo.
 
 Fique a vontade para contribuir com este projeto. :smile:
 

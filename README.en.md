@@ -8,7 +8,7 @@
 
 ## Description
 
-Simple API to list basic product information as well as pagination and filter result quantity information.
+Simple API to list basic product information as well as pagination and filter result quantity information. Project intended for daily use and also for study.
 
 Feel free to contribute to this project. :smile:
 
