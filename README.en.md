@@ -1,4 +1,4 @@
-# Products Listing + Product page
+# Simple API for product basic information listing
 
 - [Portuguese](https://github.com/Alessandro-Miranda/products-listing/blob/main/README.md)
 
@@ -21,23 +21,19 @@ The main goal is create a small database with product informations, updating, as
 - Products database; :white_check_mark:
 - Application to download and update products information based at the sku and EANS list; :white_check_mark:
 - Application to delivery product informations; :white_check_mark:
-- Example layout (Mobile and Web). :construction:
 
 ## Features
 
-- **Back**
-    - [x] Product information download
-    - [x] Product information update
-	- [x] Application for delivering filtered products
-		- [x] Return all products
-		- [x] Limit products per request
-		- [x] Pagination
-		- [x] Filter by sku
-		- [x] Filter by product ID
-		- [x] Filter by product name
-		- [x] Filter by discount tag
-- **Front**
-    - [ ] Example layout (Mobile and Desktop)
+- [x] Product information download
+- [x] Product information update
+- [x] Application for delivering filtered products
+	- [x] Return all products
+	- [x] Limit products per request
+	- [x] Pagination
+	- [x] Filter by sku
+	- [x] Filter by product ID
+	- [x] Filter by product name
+	- [x] Filter by discount tag
 
 ## Requirements
 
@@ -45,19 +41,17 @@ Make sure you have installed [Composer](https://getcomposer.org/), any PHP serve
 
 ## Getting started
 
-### Server
-
-With the project in your machine, change to server folder, from CMD and, using composer, install all necessary dependencies
+With the project in your machine, from CMD and, using composer, install all necessary dependencies
 
 ```bash
-cd server && composer install
+composer install
 
 or
 
-cd server && php composer.phar install
+php composer.phar install
 ```
 
-You also need to create the environment variables - at the server folder root - to init the database. To create the .env file just copy and fill the informations as the **_.env.example_** file and create the database following the Schema in the database folder or create a new Schema and make necessary code adaptations. To download and update the product informations just update the code for use with your plataform. This project was made using the VTEX plataform, so it's necessary create the files: *ean.txt* and *sku.txt* to obtain the relevant information about the products.
+You also need to create the environment variables to init the database. To create the .env file just copy and fill the informations as the **_.env.example_** file and create the database following the Schema in the database folder or create a new Schema and make necessary code adaptations. To download and update the product informations just update the code for use with your plataform. This project was made using the VTEX plataform, so it's necessary create the files: *ean.txt* and *sku.txt* to obtain the relevant information about the products.
 
 ### Development
 

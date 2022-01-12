@@ -1,4 +1,4 @@
-# Listagem de produtos + Página de produtos
+# API simples para listagem de informações básicas de produtos
 
 - [English](https://github.com/Alessandro-Miranda/products-listing/blob/main/README.en.md)
 
@@ -21,23 +21,19 @@ O principal objetivo do projeto é criar uma pequena base de dados com as inform
 - Base de dados de produtos; :white_check_mark:
 - Aplicação responsável por baixar e atualizar as informações dos produtos com base na lista de SKUs e EANS; :white_check_mark:
 - Aplicação responsável por servir as informações dos produtos; :white_check_mark:
-- Layout de exemplo (Mobile and Web) :construction:
 
 ## Features
 
-- **Back**
-    - [x] Download de informações de produtos
-    - [x] Atualização das informações dos produtos
-	- [x] Aplicação responsável por retornar os produtos filtrados
-		- [x] Retorno de todos os produtos
-		- [x] Retorno com limite de produtos
-		- [x] Paginação
-		- [x] Filtro por sku
-		- [x] Filtro por id do produto
-		- [x] Filtro por nome do produto
-		- [x] Filtro por tag de desconto
-- **Front**
-    - [ ] Criação da interface de exemplo Mobile e Desktop
+- [x] Download de informações de produtos
+- [x] Atualização das informações dos produtos
+- [x] Aplicação responsável por retornar os produtos filtrados
+	- [x] Retorno de todos os produtos
+	- [x] Retorno com limite de produtos
+	- [x] Paginação
+	- [x] Filtro por sku
+	- [x] Filtro por id do produto
+	- [x] Filtro por nome do produto
+	- [x] Filtro por tag de desconto
 
 ## Pré-requisitos
 
@@ -45,19 +41,17 @@ Tenha certeza de ter instalado em sua máquina o [Composer](https://getcomposer.
 
 ## Inicialização
 
-### Server
-
 Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, então, instale as dependências utilizando o composer
 
 ```bash
-cd server && composer install
+composer install
 
 ou
 
-cd server && php composer.phar install
+php composer.phar install
 ```
 
-Também será necessário criar as variáveis de ambiente - na raíz da pasta server - para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código. Para baixar os produtos e atualizá-los, será necessário atualizar o código existente conforme a necessidade da plataforma utilizada e os endpoints necessários. O projeto atual foi feito utilizando a plataforma VTEX, portanto, é necessário ter os arquivos *ean.txt* e *sku.txt* para obter as informações necessárias dos produtos.
+Também será necessário criar as variáveis de ambiente para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código. Para baixar os produtos e atualizá-los, será necessário atualizar o código existente conforme a necessidade da plataforma utilizada e os endpoints necessários. O projeto atual foi feito utilizando a plataforma VTEX, portanto, é necessário ter os arquivos *ean.txt* e *sku.txt* para obter as informações necessárias dos produtos.
 
 ### Desenvolvimento
 
@@ -177,16 +171,6 @@ A atualização dos produtos funciona de forma similiar ao download, bastando in
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
-
-### Web
-
-- [Next.js](https://nextjs.org/)
-- [styled-components](https://styled-components.com/)
-
-### Mobile
-
-- [React Native](https://reactnative.dev/)
-- [styled-components](https://styled-components.com/)
 
 ## Autor
 
