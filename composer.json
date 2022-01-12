@@ -1,0 +1,28 @@
+{
+    "name": "alessandro.miranda/server",
+    "description": "API de produtos e aplicação para download de informações de produtos diretamente da plataforma vtex",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alessandro Miranda",
+            "email": "ad.lmiranda2018@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "config": {
+        "process-timeout":0
+    },
+    "scripts": {
+        "server": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:80"
+        ]
+    }
+}
