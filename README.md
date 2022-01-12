@@ -165,8 +165,6 @@ A atualização dos produtos funciona de forma similiar ao download, bastando in
 
 ## Tecnologias e Ferramentas
 
-### Server
-
 - [PHP](https://www.php.net/)
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)

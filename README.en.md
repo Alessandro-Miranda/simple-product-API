@@ -165,8 +165,6 @@ The update process is like the download process. You just need start the file _i
 
 ## Technologies and tools
 
-### Server
-
 - [PHP](https://www.php.net/)
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
