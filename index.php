@@ -16,7 +16,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $hasProductPath = array_search('products', explode('/', $uri));
 
-if($hasProductPath === false)
+if(!$hasProductPath)
 {
     header("HTTP/1.1 404 Not Found");
     exit();
