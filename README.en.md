@@ -2,10 +2,6 @@
 
 - [Portuguese](https://github.com/Alessandro-Miranda/products-listing/blob/main/README.md)
 
-### Project state
-
-*Under development* :construction:
-
 ## Description
 
 Simple API to list basic product information as well as pagination and filter result quantity information. Project intended for daily use and also for study.
