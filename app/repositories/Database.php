@@ -22,7 +22,7 @@ class Database implements IDatabaseRepository
         try
         {
             $this->PDO = new PDO(
-                "mysql:host=$host;dbname=$database",
+                "mysql:host={$host};dbname={$database}",
                 $username,
                 $password,
                 array(PDO::ATTR_PERSISTENT => true)
@@ -54,7 +54,7 @@ class Database implements IDatabaseRepository
      */
     public function findAllProducts($actualPageLimitInit, $limit): array|false
     {
-        $stmt = $this->PDO->prepare("SELECT * FROM produtos LIMIT $actualPageLimitInit,$limit");
+        $stmt = $this->PDO->prepare("SELECT * FROM produtos LIMIT {$actualPageLimitInit},{$limit}");
         $stmt->execute();
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
