@@ -219,6 +219,7 @@ class Database implements IDatabaseRepository
         {
             if($key === 'discountTag' || $key === 'bestPrice')
             {
+                // Se o filtro for por valor, será repassado do controller separado por espaço em branco. Ex: bestPrice=50+26 será repassado como '50 26'
                 $value1 = ($key === 'discountTag') ? intval($value) - 10 : explode(" ", $value)[0];
                 $value2 = ($key === 'discountTag') ? intval($value) : explode(" ", $value)[1];
 
