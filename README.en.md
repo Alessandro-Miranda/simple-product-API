@@ -37,15 +37,7 @@ Make sure you have installed [Composer](https://getcomposer.org/), any PHP serve
 
 ## Getting started
 
-With the project in your machine, from CMD and, using composer, install all necessary dependencies
-
-```bash
-composer install
-
-or
-
-php composer.phar install
-```
+With the project in your machine, from CMD and, using composer, install all necessary dependencies using command `composer install` or `php composer.phar install`
 
 You also need to create the environment variables to init the database. To create the .env file just copy and fill the informations as the **_.env.example_** file and create the database following the Schema in the database folder or create a new Schema and make necessary code adaptations. To download and update the product informations just update the code for use with your plataform. This project was made using the VTEX plataform, so it's necessary create the files: *ean.txt* and *sku.txt* to obtain the relevant information about the products.
 
@@ -159,22 +151,12 @@ The update process is like the download process. You just need start the file _i
 
 > php initUpdate.php
 
-## Technologies and tools
+## Tecnologias e Ferramentas
 
 - [PHP](https://www.php.net/)
 - [MySQL](https://www.mysql.com/)
 - [Composer](https://getcomposer.org/)
 - [Insomnia](https://insomnia.rest/download)
-
-### Web
-
-- [Next.js](https://nextjs.org/)
-- [styled-components](https://styled-components.com/)
-
-### Mobile
-
-- [React Native](https://reactnative.dev/)
-- [styled-components](https://styled-components.com/)
 
 ## Author
 
