@@ -31,7 +31,7 @@ class Database implements IDatabaseRepository
         catch(PDOException $err)
         {
             RegisterLog::RegisterLog("Database Exception", $err->getMessage(), "exceptions.log");
-            ErrorMessages::returnMessageError(500, "Internal Server Error",$err, "Erro conectando ao banco de dados");
+            ErrorMessages::returnMessageError(500, "Internal Server Error", $err, "Erro conectando ao banco de dados");
         }
     }
 
