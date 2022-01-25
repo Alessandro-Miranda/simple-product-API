@@ -225,7 +225,7 @@ class Database implements IDatabaseRepository
 
                 array_push(
                     $whereFilter,
-                    "{$key} BETWEEN " . $value1 . " AND " . $value2
+                    "{$key} BETWEEN {$value1} AND {$value2}"
                 );
                 continue;
             }
