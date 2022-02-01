@@ -185,7 +185,7 @@ class DownloadProducts implements IDownloadProducts
             {
                 if(in_array($json["ProductId"], $price))
                 {
-                    $productInformation["sellerID"] = $price["sellerID"];
+                    $productInformation["sellerID"] = $price["sellerID"] ?? '1';
                     $productInformation["listPrice"] = $price["listPrice"];
                     $productInformation["bestPrice"] = $price["bestPrice"];
                     $productInformation["discountTag"] = $price["discountTag"];
