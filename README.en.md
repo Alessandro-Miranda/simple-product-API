@@ -37,7 +37,7 @@ Make sure you have installed [Composer](https://getcomposer.org/), any PHP serve
 
 ## Getting started
 
-With the project in your machine, from CMD and, using composer, install all necessary dependencies using command `composer install` or `php composer.phar install`
+With the project in your machine, from CMD and, using composer, install all necessary dependencies using command `composer install` or `php composer.phar install` and then `composer dump-autoload -o` to autoload the classes.
 
 You also need to create the environment variables to init the database. To create the .env file just copy and fill the informations as the **_.env.example_** file and create the database following the Schema in the database folder or create a new Schema and make necessary code adaptations. To download and update the product informations just update the code for use with your plataform. This project was made using the VTEX plataform, so it's necessary create the files: *ean.txt* and *sku.txt* to obtain the relevant information about the products.
 

@@ -37,7 +37,7 @@ Tenha certeza de ter instalado em sua máquina o [Composer](https://getcomposer.
 
 ## Inicialização
 
-Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, então, instale as dependências utilizando o comando `composer install` ou `php composer.phar install`
+Com o projeto já na máquina local, acesse a pasta server, pelo terminal e, então, instale as dependências utilizando o comando `composer install` ou `php composer.phar install` e, logo após, `composer dump-autoload -o` para gerar o autoload das classes.
 
 Também será necessário criar as variáveis de ambiente para inicialização do banco de dados. Para criar o arquivo .env basta seguir o exemplo presente no arquivo **_.env.example_** preenchendo com as informações necessárias e criar a base de dados seguindo o Schema presente na pasta database ou criando um novo formato e realizando as adaptações necessárias no código. Para baixar os produtos e atualizá-los, será necessário atualizar o código existente conforme a necessidade da plataforma utilizada e os endpoints necessários. O projeto atual foi feito utilizando a plataforma VTEX, portanto, é necessário ter os arquivos *ean.txt* e *sku.txt* para obter as informações necessárias dos produtos.
 
